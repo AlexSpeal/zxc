@@ -3,12 +3,13 @@ package edu.hw1;
 import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
 
-@SuppressWarnings("uncommentedmain")
-public class Task1 {
+@SuppressWarnings("uncommentedmain") public class Task1 {
     private Task1() {
 
     }
+
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
+
     public static Boolean check(String str) {
         boolean result = true;
         boolean flag = false;
