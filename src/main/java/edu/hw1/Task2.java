@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
-    public static int checkkoll(Integer number) {
+    public static int countDigits(Integer number) {
         int koll = 0;
         Integer x = Math.abs(number);
         if (x.equals(0)) {
@@ -26,7 +26,7 @@ import org.apache.logging.log4j.LogManager;
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         Integer number = cin.nextInt();
-        LOGGER.info(checkkoll(number));
+        LOGGER.info(countDigits(number));
         cin.close();
     }
 }
