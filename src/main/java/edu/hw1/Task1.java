@@ -1,7 +1,7 @@
 package edu.hw1;
 
-import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
 
 @SuppressWarnings("uncommentedmain") public class Task1 {
     private Task1() {
@@ -52,7 +52,7 @@ import java.util.Scanner;
         Scanner cin = new Scanner(System.in);
         LOGGER.info("Input a time: ");
         String time = cin.nextLine();
-        System.out.print(minuteToSeconds(time));
+       LOGGER.info(minuteToSeconds(time));
         cin.close();
     }
 }
