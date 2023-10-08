@@ -26,5 +26,6 @@ public class Task2 {
         Scanner cin = new Scanner(System.in);
         Integer number = cin.nextInt();
         LOGGER.info(checkkoll(number));
+        cin.close();
     }
 }
