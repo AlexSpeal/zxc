@@ -3,7 +3,7 @@ package edu.hw1;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 
-public class Task2 {
+@SuppressWarnings("uncommentedmain") public class Task2 {
     private Task2() {
 
     }
@@ -16,8 +16,9 @@ public class Task2 {
         if (x.equals(0)) {
             ++koll;
         }
+        final int del = 10;
         for (; x > 0; ++koll) {
-            x /= 10;
+            x /= del;
         }
         return koll;
     }
