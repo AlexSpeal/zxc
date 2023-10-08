@@ -3,6 +3,10 @@ package edu.hw1;
 import java.util.Scanner;
 
 public class task1 {
+    private task1() {
+
+    }
+
     public static Boolean check(String str) {
         boolean result = true;
         boolean flag = false;
@@ -23,7 +27,7 @@ public class task1 {
         return (result && flag && (str.charAt(0) != ':'));
     }
 
-    public static int MinutToSeconds(String time) {
+    public static int minuteToSeconds(String time) {
         int result;
         if (!check(time)) {
             result = -1;
@@ -45,7 +49,7 @@ public class task1 {
         Scanner cin = new Scanner(System.in);
         System.out.print("Input a time: ");
         String time = cin.nextLine();
-        System.out.print(MinutToSeconds(time));
+        System.out.print(minuteToSeconds(time));
         cin.close();
     }
 }
