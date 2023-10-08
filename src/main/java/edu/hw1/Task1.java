@@ -52,7 +52,7 @@ import org.apache.logging.log4j.LogManager;
         Scanner cin = new Scanner(System.in);
         LOGGER.info("Input a time: ");
         String time = cin.nextLine();
-       LOGGER.info(minuteToSeconds(time));
+        LOGGER.info(minuteToSeconds(time));
         cin.close();
     }
 }
