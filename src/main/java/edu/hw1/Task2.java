@@ -1,7 +1,7 @@
 package edu.hw1;
 
-import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
 
 public class Task2 {
     private Task2() {
