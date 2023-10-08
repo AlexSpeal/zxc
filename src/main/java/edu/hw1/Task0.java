@@ -1,5 +1,6 @@
 package edu.hw1;
 
+import org.apache.logging.log4j.LogManager;
 import java.util.logging.Logger;
 
 @SuppressWarnings("uncommentedmain")
@@ -9,8 +10,10 @@ public class Task0 {
 
     }
 
+    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
+
     public static void main(String[] args) {
-        Logger logger = Logger.getLogger(Task0.class.getName());
-        logger.info("Привет, мир!");
+
+        LOGGER.info("Привет, мир!");
     }
 }
