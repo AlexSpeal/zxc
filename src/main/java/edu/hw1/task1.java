@@ -7,9 +7,9 @@ public class task1 {
         boolean result = true;
         boolean flag = false;
         int length = str.length();
-        String check_min = str.substring(str.indexOf(':') + 1, length);
-        String check_sec = str.substring(0, str.indexOf(':'));
-        if (check_sec.length() < 2 || check_min.length() != 2) {
+        String checkmin = str.substring(str.indexOf(':') + 1, length);
+        String checksec = str.substring(0, str.indexOf(':'));
+        if (checksec.length() < 2 || checkmin.length() != 2) {
             result = false;
         }
 
@@ -23,16 +23,17 @@ public class task1 {
         return (result && flag && (str.charAt(0) != ':'));
     }
 
-    public static int Minut_to_Seconds(String time) {
+    public static int MinutToSeconds(String time) {
         int result;
         if (!check(time)) {
             result = -1;
         } else {
-            int to_colon = time.indexOf(':');
-            int minut = Integer.parseInt(time.substring(0, to_colon));
-            int seconds = Integer.parseInt(time.substring(to_colon + 1));
-            if (seconds < 60 && seconds >= 0 && minut >= 0) {
-                result = minut * 60 + seconds;
+            int tocolon = time.indexOf(':');
+            int minut = Integer.parseInt(time.substring(0, tocolon));
+            int seconds = Integer.parseInt(time.substring(tocolon + 1));
+            final int chifra = 60;
+            if (seconds <= chifra && seconds >= 0 && minut >= 0) {
+                result = minut * chifra + seconds;
             } else {
                 result = -1;
             }
@@ -44,7 +45,7 @@ public class task1 {
         Scanner cin = new Scanner(System.in);
         System.out.print("Input a time: ");
         String time = cin.nextLine();
-        System.out.print(Minut_to_Seconds(time));
+        System.out.print(MinutToSeconds(time));
         cin.close();
     }
 }
