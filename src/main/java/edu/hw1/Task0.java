@@ -1,7 +1,6 @@
 package edu.hw1;
 
 import org.apache.logging.log4j.LogManager;
-import java.util.logging.Logger;
 
 @SuppressWarnings("uncommentedmain")
 public class Task0 {
