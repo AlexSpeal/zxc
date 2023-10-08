@@ -2,8 +2,9 @@ package edu.hw1;
 
 import java.util.Scanner;
 
-public class task1 {
-    private task1() {
+@SuppressWarnings("uncommentedmain")
+public class Task1 {
+    private Task1() {
 
     }
 
