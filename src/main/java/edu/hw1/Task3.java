@@ -1,12 +1,16 @@
 package edu.hw1;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 import org.apache.logging.log4j.LogManager;
+import java.util.Arrays;
 
 @SuppressWarnings("uncommentedmain")
 public class Task3 {
+    private Task3() {
+
+    }
+
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static Boolean isNestable(int[] mas1, int[] mas2) {
