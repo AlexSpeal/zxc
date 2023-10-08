@@ -14,10 +14,15 @@ import org.apache.logging.log4j.LogManager;
         boolean result = true;
         boolean flag = false;
         int length = str.length();
-        String checkmin = str.substring(str.indexOf(':') + 1, length);
-        String checksec = str.substring(0, str.indexOf(':'));
-        if (checksec.length() < 2 || checkmin.length() != 2) {
+        Integer index = str.indexOf(':');
+        if (index.equals(-1)) {
             result = false;
+        } else {
+            String checkmin = str.substring(str.indexOf(':') + 1, length);
+            String checksec = str.substring(0, str.indexOf(':'));
+            if (checksec.length() < 2 || checkmin.length() != 2) {
+                result = false;
+            }
         }
 
         for (int i = 0; i < length && result; ++i) {
