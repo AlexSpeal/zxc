@@ -14,9 +14,10 @@ public class Task5 {
     public static Boolean palindrome(char[] str) {
         boolean result = true;
         int len = str.length;
-        for (int i = 0; i < len / 2 && result; ++i) {
+        for (int i = 0; i < len / 2; ++i) {
             if (str[i] != str[len - 1 - i]) {
                 result = false;
+                break;
             }
         }
 
@@ -26,22 +27,22 @@ public class Task5 {
     public static Boolean isPalindromeDescendant(Integer number) {
 
         boolean result = false;
-        String resultstr = null;
+        StringBuilder resultstr;
         char[] num;
         String str = Integer.toString(number);
         if (number >= 10) {
 
-            resultstr = "";
+            resultstr = new StringBuilder();
             while (str.length() != 1 && !result) {
                 num = str.toCharArray();
                 if (!palindrome(num)) {
                     if (str.length() % 2 == 0) {
                         for (int i = 0; i < num.length; i += 2) {
-                            resultstr += (Character.digit(num[i], 10) + Character.digit(num[i + 1], 10));
+                            resultstr.append(Character.digit(num[i], 10) + Character.digit(num[i + 1], 10));
 
                         }
-                        str = resultstr;
-                        resultstr = "";
+                        str = resultstr.toString();
+                        resultstr = new StringBuilder();
                     } else {
                         return false;
                     }
