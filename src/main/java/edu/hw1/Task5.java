@@ -30,8 +30,8 @@ public class Task5 {
         StringBuilder resultstr;
         char[] num;
         String str = Integer.toString(number);
-        final int znachconst = 10;
-        if (number >= znachconst) {
+        final int ten = 10;
+        if (number >= ten) {
 
             resultstr = new StringBuilder();
             while (str.length() != 1 && !result) {
@@ -40,7 +40,7 @@ public class Task5 {
                     if (str.length() % 2 == 0) {
                         for (int i = 0; i < num.length; i += 2) {
                             resultstr.append(
-                                Character.digit(num[i], znachconst) + Character.digit(num[i + 1], znachconst));
+                                Character.digit(num[i], ten) + Character.digit(num[i + 1], ten));
 
                         }
                         str = resultstr.toString();
