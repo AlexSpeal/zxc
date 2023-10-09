@@ -1,7 +1,7 @@
 package edu.hw1;
 
-import org.apache.logging.log4j.LogManager;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
 
 @SuppressWarnings("uncommentedmain")
 public class Task5 {
@@ -30,7 +30,8 @@ public class Task5 {
         StringBuilder resultstr;
         char[] num;
         String str = Integer.toString(number);
-        if (number >= 10) {
+        final int check = 10;
+        if (number >= check) {
 
             resultstr = new StringBuilder();
             while (str.length() != 1 && !result) {
