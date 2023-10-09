@@ -1,7 +1,7 @@
 package edu.hw1;
 
-import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 
 @SuppressWarnings("uncommentedmain")
@@ -27,12 +27,13 @@ public class Task6 {
     }
 
     public static int countK(int number) {
-        if (number <= 1000 || number >= 9999 || proverka(number)) {
+        final int tisacha = 1000;
+        final int devdevdev = 9999;
+        if (number <= tisacha || number >= devdevdev || proverka(number)) {
             return -1;
         }
         int result = 1;
         final int KAPR = 6174;
-        final int tisacha = 1000;
         final int TEN = 10;
         int copx = number;
         final int n = 4;
