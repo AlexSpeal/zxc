@@ -16,7 +16,7 @@ public class Task8 {
     // }
     final static int ONE = 1;
     final static int TWO = 2;
-    final static int n = 8;
+    final static int N = 8;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static boolean left(int[][] board, int i, int j) {
@@ -26,26 +26,26 @@ public class Task8 {
 
     public static boolean top(int[][] board, int i, int j) {
 
-        return (i - ONE >= 0 && j + TWO < n && board[i - ONE][j + TWO] == ONE)
-            || (i - TWO >= 0 && j + ONE < n && board[i - TWO][j + ONE] == ONE);
+        return (i - ONE >= 0 && j + TWO < N && board[i - ONE][j + TWO] == ONE)
+            || (i - TWO >= 0 && j + ONE < N && board[i - TWO][j + ONE] == ONE);
     }
 
     public static boolean right(int[][] board, int i, int j) {
-        return (i - ONE >= 0 && j + TWO < n && board[i - ONE][j + TWO] == ONE)
-            || (i + ONE < n && j + TWO < n && board[i + ONE][j + TWO] == ONE);
+        return (i - ONE >= 0 && j + TWO < N && board[i - ONE][j + TWO] == ONE)
+            || (i + ONE < N && j + TWO < N && board[i + ONE][j + TWO] == ONE);
     }
 
     public static boolean down(int[][] board, int i, int j) {
 
-        return (i + TWO < n && j - ONE >= 0 && board[i + TWO][j - ONE] == ONE)
-            || (i + ONE < n && j - TWO >= 0 && board[i + ONE][j - TWO] == ONE);
+        return (i + TWO < N && j - ONE >= 0 && board[i + TWO][j - ONE] == ONE)
+            || (i + ONE < N && j - TWO >= 0 && board[i + ONE][j - TWO] == ONE);
     }
 
     public static boolean knightBoardCapture(int[][] board) {
 
         boolean result = true;
-        for (int i = 0; i < n && result; ++i) {
-            for (int j = 0; j < n && result; ++j) {
+        for (int i = 0; i < N && result; ++i) {
+            for (int j = 0; j < N && result; ++j) {
                 if (board[i][j] == 1) {
                     if (left(board, i, j) || right(board, i, j) || top(board, i, j) || down(board, i, j)) {
                         result = false;
