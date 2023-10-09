@@ -30,8 +30,8 @@ public class Task5 {
         StringBuilder resultstr;
         char[] num;
         String str = Integer.toString(number);
-        final int check = 10;
-        if (number >= check) {
+        final int znachconst = 10;
+        if (number >= znachconst) {
 
             resultstr = new StringBuilder();
             while (str.length() != 1 && !result) {
@@ -39,7 +39,8 @@ public class Task5 {
                 if (!palindrome(num)) {
                     if (str.length() % 2 == 0) {
                         for (int i = 0; i < num.length; i += 2) {
-                            resultstr.append(Character.digit(num[i], 10) + Character.digit(num[i + 1], 10));
+                            resultstr.append(
+                                Character.digit(num[i], znachconst) + Character.digit(num[i + 1], znachconst));
 
                         }
                         str = resultstr.toString();
