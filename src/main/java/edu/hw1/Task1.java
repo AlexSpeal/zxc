@@ -3,14 +3,16 @@ package edu.hw1;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 
-@SuppressWarnings("uncommentedmain") public class Task1 {
+@SuppressWarnings("uncommentedmain")
+public class Task1 {
     private Task1() {
 
     }
 
+    final static int SecinMin = 60;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
-    public static Boolean check(String str) {
+    private static Boolean check(String str) {
         boolean result = true;
         boolean flag = false;
         int length = str.length();
@@ -18,8 +20,8 @@ import org.apache.logging.log4j.LogManager;
         if (index.equals(-1)) {
             result = false;
         } else {
-            String checkmin = str.substring(str.indexOf(':') + 1, length);
-            String checksec = str.substring(0, str.indexOf(':'));
+            String checksec = str.substring(str.indexOf(':') + 1, length);
+            String checkmin = str.substring(0, str.indexOf(':'));
             if (checksec.length() < 2 || checkmin.length() != 2) {
                 result = false;
             }
@@ -43,9 +45,8 @@ import org.apache.logging.log4j.LogManager;
             int tocolon = time.indexOf(':');
             int minut = Integer.parseInt(time.substring(0, tocolon));
             int seconds = Integer.parseInt(time.substring(tocolon + 1));
-            final int chifra = 60;
-            if (seconds <= chifra && seconds >= 0 && minut >= 0) {
-                result = minut * chifra + seconds;
+            if (seconds <= SecinMin && seconds >= 0 && minut >= 0) {
+                result = minut * SecinMin + seconds;
             } else {
                 result = -1;
             }

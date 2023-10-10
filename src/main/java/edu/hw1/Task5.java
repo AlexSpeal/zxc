@@ -11,7 +11,7 @@ public class Task5 {
 
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
-    public static Boolean palindrome(char[] str) {
+    private static Boolean palindrome(char[] str) {
         boolean result = true;
         int len = str.length;
         for (int i = 0; i < len / 2; ++i) {

@@ -8,12 +8,6 @@ public class Task8 {
 
     }
 
-    // public static boolean check(int[][] board) {
-    //   boolean result = false;
-    //   if () {
-    //     return result;
-    //  }
-    // }
     final static int ONE = 1;
     final static int TWO = 2;
     final static int N = 8;

@@ -1,11 +1,13 @@
 package edu.hw1;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task8Test {
     @Test
-    void knightBoardCapture() {
+    @DisplayName("Конь бьет другого коня")
+    void test1() {
         int[][] board = {{0, 0, 0, 1, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 1, 0, 0, 0, 1, 0, 0},
@@ -19,7 +21,12 @@ class Task8Test {
         boolean expected = true;
         assertEquals(expected, actual);
 
-        board = new int[][] {{1, 0, 1, 0, 1, 0, 1, 0},
+    }
+
+    @Test
+    @DisplayName("Конь не бьет коня")
+    void test2() {
+        int[][] board = new int[][] {{1, 0, 1, 0, 1, 0, 1, 0},
             {0, 1, 0, 1, 0, 1, 0, 1},
             {0, 0, 0, 0, 1, 0, 1, 0},
             {0, 0, 1, 0, 0, 1, 0, 1},
@@ -28,21 +35,10 @@ class Task8Test {
             {1, 0, 0, 0, 1, 0, 1, 0},
             {0, 0, 0, 1, 0, 1, 0, 1}};
 
-        actual = Task8.knightBoardCapture(board);
-        expected = false;
+        boolean actual = Task8.knightBoardCapture(board);
+        boolean expected = false;
         assertEquals(expected, actual);
 
-        board = new int[][] {{0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 1, 0, 0, 0, 0},
-            {1, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 0, 0, 1, 0, 0},
-            {1, 0, 0, 0, 0, 0, 0, 0}};
-
-        actual = Task8.knightBoardCapture(board);
-        expected = false;
-        assertEquals(expected, actual);
     }
+
 }
