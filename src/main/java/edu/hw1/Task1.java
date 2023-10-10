@@ -9,7 +9,7 @@ public class Task1 {
 
     }
 
-    final static int SecinMin = 60;
+    final static int SECINMIN = 60;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     private static Boolean check(String str) {
@@ -45,8 +45,8 @@ public class Task1 {
             int tocolon = time.indexOf(':');
             int minut = Integer.parseInt(time.substring(0, tocolon));
             int seconds = Integer.parseInt(time.substring(tocolon + 1));
-            if (seconds <= SecinMin && seconds >= 0 && minut >= 0) {
-                result = minut * SecinMin + seconds;
+            if (seconds <= SECINMIN && seconds >= 0 && minut >= 0) {
+                result = minut * SECINMIN + seconds;
             } else {
                 result = -1;
             }

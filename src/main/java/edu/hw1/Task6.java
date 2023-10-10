@@ -10,10 +10,10 @@ public class Task6 {
 
     }
 
-    final static int Thousand = 1000;
+    final static int THOUSAND = 1000;
     final static int KAPR = 6174;
-    final static int Maxvalue = 9999;
-    final static int Size = 4;
+    final static int MAXVALUE = 9999;
+    final static int SIZE = 4;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     private static boolean proverka(Integer number) {
@@ -40,15 +40,15 @@ public class Task6 {
             result = 1;
         }
 
-        if (number <= Thousand || number >= Maxvalue || proverka(number)) {
+        if (number <= THOUSAND || number >= MAXVALUE || proverka(number)) {
             return -1;
         }
 
         final int TEN = 10;
         int copx = number;
 
-        int[] mas = new int[Size];
-        for (int i = 0; i < Size; ++i) {
+        int[] mas = new int[SIZE];
+        for (int i = 0; i < SIZE; ++i) {
             mas[i] = copx % TEN;
             copx = copx / TEN;
 
@@ -56,10 +56,10 @@ public class Task6 {
         Arrays.sort(mas);
         int minnum = 0;
         int maxnum = 0;
-        int mn2 = Thousand;
+        int mn2 = THOUSAND;
         int mn1 = 1;
 
-        for (int i = 0; i < Size; ++i) {
+        for (int i = 0; i < SIZE; ++i) {
             minnum += mn2 * mas[i];
             maxnum += mn1 * mas[i];
             mn2 /= TEN;

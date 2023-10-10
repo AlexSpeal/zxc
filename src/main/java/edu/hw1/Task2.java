@@ -9,7 +9,7 @@ public class Task2 {
 
     }
 
-    final static int del = 10;
+    final static int DEL = 10;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static int countDigits(Integer number) {
@@ -20,7 +20,7 @@ public class Task2 {
         }
 
         for (; x > 0; ++koll) {
-            x /= del;
+            x /= DEL;
         }
         return koll;
     }
