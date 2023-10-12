@@ -38,27 +38,34 @@ public class Task8 {
     public static boolean knightBoardCapture(int[][] board) {
 
         boolean result = true;
-        for (int i = 0; i < N && result; ++i) {
-            for (int j = 0; j < N && result; ++j) {
-                if (board[i][j] == 1) {
-                    if (left(board, i, j) || right(board, i, j) || top(board, i, j) || down(board, i, j)) {
-                        result = false;
+        boolean horse = false;
+        if (board != null) {
+            for (int i = 0; i < N && result; ++i) {
+                for (int j = 0; j < N && result; ++j) {
+                    if (board[i][j] == 1) {
+                        horse = true;
+                        if (left(board, i, j) || right(board, i, j) || top(board, i, j) || down(board, i, j)) {
+                            result = false;
+                        }
                     }
                 }
             }
+        }
+        if (board == null || !horse) {
+            result = false;
         }
         return result;
     }
 
     public static void main(String[] args) {
-        int[][] board = {{1, 0, 1, 0, 1, 0, 1, 0},
-            {0, 1, 0, 1, 0, 1, 0, 1},
+        int[][] board = {{0, 0, 0, 1, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 1, 0, 0},
             {0, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 1, 0, 0, 1, 0, 1},
-            {1, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 0, 0, 0, 1, 0, 1},
-            {1, 0, 0, 0, 1, 0, 1, 0},
-            {0, 0, 0, 1, 0, 1, 0, 1}};
+            {0, 1, 0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 0, 1},
+            {0, 0, 0, 0, 1, 0, 0, 0}};
         LOGGER.info(knightBoardCapture(board));
     }
 }

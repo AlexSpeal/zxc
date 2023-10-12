@@ -41,4 +41,32 @@ class Task8Test {
 
     }
 
+    @Test
+    @DisplayName("Коней нет на доске")
+    void test3() {
+        int[][] board = new int[][] {{0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0}};
+
+        boolean actual = Task8.knightBoardCapture(board);
+        boolean expected = false;
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    @DisplayName("Доска null")
+    void test4() {
+        int[][] board = null;
+        boolean actual = Task8.knightBoardCapture(board);
+        boolean expected = false;
+        assertEquals(expected, actual);
+
+    }
+
 }
