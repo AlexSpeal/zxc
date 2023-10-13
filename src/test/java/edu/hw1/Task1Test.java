@@ -68,4 +68,13 @@ class Task1Test {
 
     }
 
+    @Test
+    @DisplayName("60 секунд")
+    void test7() {
+        int actual = Task1.minuteToSeconds("01:60");
+        int expected = -1;
+        assertEquals(expected, actual);
+
+    }
+
 }

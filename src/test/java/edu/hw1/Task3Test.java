@@ -11,9 +11,8 @@ class Task3Test {
         int[] mas1 = {1, 2, 3, 4};
         int[] mas2 = {0, 6};
         boolean actual = Task3.isNestable(mas1, mas2);
-        boolean  expected = true;
+        boolean expected = true;
         assertEquals(expected, actual);
-
 
     }
 
@@ -23,9 +22,8 @@ class Task3Test {
         int[] mas1 = new int[] {9, 9, 8};
         int[] mas2 = new int[] {8, 9};
         boolean actual = Task3.isNestable(mas1, mas2);
-        boolean  expected = false;
+        boolean expected = false;
         assertEquals(expected, actual);
-
 
     }
 
@@ -38,8 +36,8 @@ class Task3Test {
         boolean expected = false;
         assertEquals(expected, actual);
 
-
     }
+
     @Test
     @DisplayName("Один из массивов пуст")
     void test4() {
@@ -49,13 +47,6 @@ class Task3Test {
         boolean expected = false;
         assertEquals(expected, actual);
 
-
     }
-
-
-
-
-
-
 
 }
