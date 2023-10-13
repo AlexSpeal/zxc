@@ -69,7 +69,7 @@ class Task1Test {
     }
 
     @Test
-    @DisplayName("60 секунд")
+    @DisplayName("Введено 60 сек")
     void test7() {
         int actual = Task1.minuteToSeconds("01:60");
         int expected = -1;
