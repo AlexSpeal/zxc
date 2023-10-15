@@ -16,8 +16,8 @@ class Task2Test {
     @ParameterizedTest
     @MethodSource("rectangles")
     void rectangleArea(Task2.Rectangle rect) {
-        rect=rect.setWidth(20);
-        rect=rect.setHeight(10);
+        rect.setWidth(20);
+        rect.setHeight(10);
 
         assertThat(rect.area()).isEqualTo(200.0);
     }
