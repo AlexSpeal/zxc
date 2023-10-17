@@ -9,6 +9,21 @@ public class Game {
     private final WordMask maskOperator = new WordMask();
     private String letter = "";
 
+    private void input() {
+        Scanner scanner = new Scanner(System.in);
+
+        boolean flag = true;
+        do {
+            letter = scanner.nextLine();
+            if (letter.length() == 1 && Character.isLetter(letter.charAt(0))) {
+                flag = false;
+            } else {
+                System.out.println("Input correct letter:");
+                letter = scanner.nextLine();
+            }
+        } while (flag);
+    }
+
     private boolean Win(int numberGuessletter, Set<String> wordUniqueLetters) {
         return numberGuessletter == wordUniqueLetters.size();
     }
@@ -30,7 +45,8 @@ public class Game {
 
                 while (!Win(maskOperator.getNumberGuessletter(), maskOperator.getWordUniqueLetters())) {
                     System.out.println("Guess the letter: ");
-                    letter = scanner.nextLine();
+                    input();
+                    //letter = scanner.nextLine();
                     if (maskOperator.isLetterbeused(letter)) {
                         System.out.println("This letter is already by used!");
                     } else {
@@ -55,8 +71,7 @@ public class Game {
                     }
                 }
                 System.out.println("congratulations!!!!");
-            }
-            else{
+            } else {
                 System.exit(0);
             }
 
