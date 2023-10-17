@@ -1,9 +1,9 @@
 package project1;
 
-import java.awt.Window;
 import java.util.Scanner;
 import java.util.Set;
 
+@SuppressWarnings("uncommentedmain")
 public class Game {
     private final RandomWordSelector wordSelector = new RandomWordSelector();
     private final WordMask maskOperator = new WordMask();
