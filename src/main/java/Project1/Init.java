@@ -1,6 +1,4 @@
-package project1;
-
-import java.util.Scanner;
+package Project1;
 
 @SuppressWarnings("uncommentedmain")
 public class Init {
