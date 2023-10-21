@@ -2,13 +2,13 @@ package edu.hw2.Task4;
 
 import org.apache.logging.log4j.LogManager;
 
+@SuppressWarnings("uncommentedmain")
 public class Task4 {
     private Task4() {
 
     }
 
-    public record CallingInfo(String className, String methodName) {
-    }
+    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static CallingInfo callingInfo() {
         try {
@@ -21,8 +21,6 @@ public class Task4 {
 
         }
     }
-
-    private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
         LOGGER.info(callingInfo());

@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 @SuppressWarnings("uncommentedmain")
 
 public class Task3 {
-
+    final static int FOUR = 4;
     final static String ERROR = "Error";
 
     final static String COMPLETE = " выполнена!";
@@ -22,7 +22,7 @@ public class Task3 {
     }
 
     public static void main(String[] args) throws Exception {
-        PopularCommandExecutor executor = new PopularCommandExecutor(4);
+        PopularCommandExecutor executor = new PopularCommandExecutor(FOUR);
         executor.updatePackages();
     }
 
@@ -42,7 +42,7 @@ public class Task3 {
         public void execute(String command) throws ConnectionException {
             Random random = new Random();
 
-            if (random.nextInt(intBOUND) == 1) {
+            if (random.nextInt(intBOUND) == 0) {
                 throw new ConnectionException(ERROR, new RuntimeException());
             }
             LOGGER.info(command + COMPLETE);
@@ -76,6 +76,11 @@ public class Task3 {
         private final ConnectionManager manager;
         private final int maxAttempts;
 
+        PopularCommandExecutor(int maxAttempts, boolean key) {
+            manager = key ? new DefaultConnectionManager() : new FaultyConnectionManager();
+            this.maxAttempts = maxAttempts;
+        }
+
         PopularCommandExecutor(int maxAttempts) {
             final int intBOUND = 2;
             Random random = new Random();
@@ -104,7 +109,11 @@ public class Task3 {
                     }
                 }
             }
-            connection.close();
+            try {
+                connection.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

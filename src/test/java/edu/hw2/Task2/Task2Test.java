@@ -1,6 +1,5 @@
-package edu.hw2;
+package edu.hw2.Task2;
 
-import edu.hw2.Task2.Task2;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
