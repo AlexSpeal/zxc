@@ -72,7 +72,7 @@ public class Game {
                     }
                     if (mistakesCount == MISTAKES || giveUp) {
                         if (giveUp) {
-                            System.out.println("You give up!");
+                            System.out.println("\nYou give up!");
                             giveUp = false;
                         } else {
                             System.out.println("You lose!");
