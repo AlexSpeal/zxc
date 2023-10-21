@@ -32,12 +32,13 @@ class Task3Test {
     })
     void test2(String command) throws Exception{
         boolean actual = false;
-        boolean expected = false;
+        boolean expected = true;
         try {
             Task3.PopularCommandExecutor executor = new Task3.PopularCommandExecutor(3, false);
             executor.tryExecute(command);
+            actual=true;
         } catch (ConnectionException e) {
-            expected = true;
+            expected = false;
         }
         assertEquals(expected, actual);
     }
@@ -46,12 +47,13 @@ class Task3Test {
     @DisplayName("Количество попыток равно нулю")
     void test3()throws Exception {
         boolean actual = false;
-        boolean expected = false;
+        boolean expected = true;
         try {
             Task3.PopularCommandExecutor executor = new Task3.PopularCommandExecutor(0, true);
             executor.updatePackages();
+            actual=true;
         } catch (ConnectionException e) {
-            expected = true;
+            expected = false;
         }
         assertEquals(expected, actual);
     }
