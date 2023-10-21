@@ -1,11 +1,11 @@
-package Project1;
+package project;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("uncommentedmain")
+@SuppressWarnings("RegexpSinglelineJava")
 public class WordMask {
     private String word;
     private String[] mask;

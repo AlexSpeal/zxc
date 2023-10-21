@@ -1,4 +1,4 @@
-package Project1;
+package project;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,18 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-@SuppressWarnings("uncommentedmain")
+@SuppressWarnings("RegexpSinglelineJava")
 public class RandomWordSelector {
     private String[] words = new String[0];
 
     public RandomWordSelector() {
-        ScanWordsFromFile();
+        scanWordsFromFile();
     }
 
-    private void ScanWordsFromFile() {
+    private void scanWordsFromFile() {
         StringBuilder strbuild = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(
-            "C:\\Users\\alexs\\IdeaProjects\\java-course-2023-main\\project-template\\src\\main\\java\\project1\\words.txt"))) {
+            "C:\\Users\\alexs\\IdeaProjects\\java-course-2023-main\\project-template\\src"
+                + "\\main\\java\\Project1\\resources\\text.txt"))) {
             br.lines().forEach(strbuild::append);
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
