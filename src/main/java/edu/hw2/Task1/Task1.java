@@ -1,4 +1,4 @@
-package edu.hw2;
+package edu.hw2.Task1;
 
 import org.apache.logging.log4j.LogManager;
 

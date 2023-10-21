@@ -1,4 +1,4 @@
-package edu.hw2;
+package edu.hw2.Task3;
 
 import java.util.Random;
 import org.apache.logging.log4j.LogManager;
@@ -24,10 +24,6 @@ public class Task3 {
     public static void main(String[] args) throws Exception {
         PopularCommandExecutor executor = new PopularCommandExecutor(4);
         executor.updatePackages();
-    }
-
-    public interface Connection extends AutoCloseable {
-        void execute(String command);
     }
 
     public static class StableConnection implements Connection {
@@ -57,10 +53,6 @@ public class Task3 {
         }
     }
 
-    public interface ConnectionManager {
-        Connection getConnection();
-    }
-
     public static class DefaultConnectionManager implements ConnectionManager {
         public final int intBOUND = 5;
 
@@ -77,12 +69,6 @@ public class Task3 {
     public static class FaultyConnectionManager implements ConnectionManager {
         public Connection getConnection() {
             return new FaultyConnection();
-        }
-    }
-
-    public static class ConnectionException extends RuntimeException {
-        public ConnectionException(String message, Throwable cause) {
-            super(message, cause);
         }
     }
 
