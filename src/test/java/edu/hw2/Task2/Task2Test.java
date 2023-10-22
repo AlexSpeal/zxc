@@ -8,14 +8,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class Task2Test {
     static Arguments[] rectangles() {
         return new Arguments[] {
-            Arguments.of(new Task2.Rectangle()),
-            Arguments.of(new Task2.Square())
+            Arguments.of(new Rectangle()),
+            Arguments.of(new Square())
         };
     }
 
     @ParameterizedTest
     @MethodSource("rectangles")
-    void rectangleArea(Task2.Rectangle rect) {
+    void rectangleArea(Rectangle rect) {
         rect.setWidth(20);
         rect.setHeight(10);
 

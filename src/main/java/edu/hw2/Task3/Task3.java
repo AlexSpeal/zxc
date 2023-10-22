@@ -99,7 +99,7 @@ public class Task3 {
                 throw new ConnectionException(ERROR, new RuntimeException());
             }
             for (int cnt = 1; cnt <= maxAttempts && fl; cnt++) {
-                try {
+                try (connection) {
                     connection.execute(command);
                     fl = false;
                 } catch (ConnectionException e) {
@@ -108,11 +108,6 @@ public class Task3 {
                         throw new ConnectionException(ERROR, new RuntimeException());
                     }
                 }
-            }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
         }
     }

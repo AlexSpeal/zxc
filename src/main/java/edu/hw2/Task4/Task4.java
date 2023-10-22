@@ -11,15 +11,10 @@ public class Task4 {
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     public static CallingInfo callingInfo() {
-        try {
-            throw new Exception();
-        } catch (Throwable e) {
-            StackTraceElement[] stacktrace = e.getStackTrace();
-            String str1 = stacktrace[1].toString();
-            String str = str1.substring(0, str1.indexOf('('));
-            return new CallingInfo(str.substring(0, str.lastIndexOf('.')), str.substring(str.lastIndexOf('.') + 1));
-
-        }
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        String str1 = stackTrace[2].toString();
+        String str = str1.substring(0, str1.indexOf('('));
+        return new CallingInfo(str.substring(0, str.lastIndexOf('.')), str.substring(str.lastIndexOf('.') + 1));
     }
 
     public static void main(String[] args) {
