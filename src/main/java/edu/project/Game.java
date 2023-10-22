@@ -59,25 +59,25 @@ public class Game {
                 mistakesCount = 0;
                 maskOperator.clearBuffer();
                 maskOperator.setWord(guessedWord);
-                System.out.println("A word has been guessed!");
+                System.out.print("A word has been guessed!\n");
                 maskOperator.printMask();
-                System.out.println("If you want to give up, enter command - give up:");
+                System.out.print("If you want to give up, enter command - give up:\n");
 
                 while (!win(maskOperator.getNumberGuessletter(), maskOperator.getWordUniqueLetters())) {
-                    System.out.println("Guess the letter: ");
+                    System.out.print("Guess the letter: \n");
                     input();
                     if (maskOperator.isLetterbeused(letter)) {
-                        System.out.println("This letter is already by used!");
+                        System.out.print("This letter is already by used!\n");
                     } else {
                         maskOperator.inputLetterInSet(letter);
                         if (maskOperator.checkLetterinSet(letter)) {
-                            System.out.println("You gueses the letter!");
-                            System.out.println("Word:");
+                            System.out.print("You gueses the letter!\n");
+                            System.out.print("Word:\n");
                             maskOperator.updateMask(letter);
                             maskOperator.printMask();
                         } else {
                             if (!giveUp) {
-                                System.out.println("You didn't goess");
+                                System.out.print("You didn't goess\n");
                                 mistakesCount++;
                                 System.out.printf("Your mistakes %s/5\n", mistakesCount);
                                 maskOperator.printMask();
@@ -87,19 +87,19 @@ public class Game {
                     }
                     if (mistakesCount == MISTAKES || giveUp) {
                         if (giveUp) {
-                            System.out.println("\nYou give up!");
+                            System.out.print("\nYou give up!\n");
                             giveUp = false;
                         } else {
-                            System.out.println("You lose!");
+                            System.out.print("You lose!\n");
                         }
                         System.out.printf("Word: %s\n", guessedWord);
                         break;
                     }
                 }
-                System.out.println("Menu: [N]ew game/ [E]xit");
+                System.out.print("Menu: [N]ew game/ [E]xit\n");
                 choice = scanner.nextLine();
                 if (choice.equalsIgnoreCase("N")) {
-                    System.out.println("Game:");
+                    System.out.print("Game:\n");
                     return start(new RandomWordSelector().getRandomWord());
 
                 } else if (choice.equalsIgnoreCase("E")) {
@@ -107,7 +107,7 @@ public class Game {
                     return true;
 
                 } else {
-                    System.out.println("Input correct letter");
+                    System.out.print("Input correct letter\n");
                 }
             }
         } else {
