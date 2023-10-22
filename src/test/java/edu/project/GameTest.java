@@ -1,10 +1,12 @@
-package project1;
+package edu.project;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class InitTest {
+class GameTest {
     @Test
     @DisplayName("Проверка что состояние игры при угадывании корректо изменяется")
     void guess() {
@@ -46,13 +48,14 @@ class InitTest {
         String expected = "You didn't goess\r\nYour mistakes 1/5";
         assertEquals(expected, actual);
     }
+
     @Test
     @DisplayName("Ввод стринги >1 длины")
     void wrongLetter() {
         Game initialization = new Game("ty\nr\ne\nc\nt\nE");
         initialization.start("rect");
-        String str=initialization.getOut();
-        String actual = str.substring(102,123);
+        String str = initialization.getOut();
+        String actual = str.substring(102, 123);
         String expected = "Input correct letter:";
         assertEquals(expected, actual);
     }
