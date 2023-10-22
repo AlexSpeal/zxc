@@ -29,7 +29,7 @@ public class WordMask {
     }
 
     public void printMask() {
-        System.out.println(String.join("", mask));
+        System.out.print(String.join("", mask) + "\n");
     }
 
     public void updateMask(String letter) {

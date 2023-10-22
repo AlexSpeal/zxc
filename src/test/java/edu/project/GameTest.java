@@ -13,7 +13,7 @@ class GameTest {
         Game initialization = new Game("a\nd\nh\na\nn\ne");
         initialization.start("adhan");
         String str = initialization.getOut();
-        String actual = str.substring(100, 122);
+        String actual = str.substring(99, 121);
         String expected = "You gueses the letter!";
         assertEquals(expected, actual);
     }
@@ -33,7 +33,7 @@ class GameTest {
         Game initialization = new Game("a\ny\ni\no\nf\ng\nE");
         initialization.start("abcd");
         String str = initialization.getOut();
-        String actual = str.substring(str.length() - 46, str.length() - 37);
+        String actual = str.substring(str.length() - 46, str.length() -37);
         String expected = "You lose!";
         assertEquals(expected, actual);
     }
@@ -44,7 +44,7 @@ class GameTest {
         Game initialization = new Game("a\ny\ni\no\nf\nE");
         initialization.start("zxc");
         String str = initialization.getOut();
-        String actual = str.substring(98, 132);
+        String actual = str.substring(97, 131);
         String expected = "You didn't goess\nYour mistakes 1/5";
         assertEquals(expected, actual);
     }
@@ -55,7 +55,7 @@ class GameTest {
         Game initialization = new Game("ty\nr\ne\nc\nt\nE");
         initialization.start("rect");
         String str = initialization.getOut();
-        String actual = str.substring(99, 120);
+        String actual = str.substring(98, 119);
         String expected = "Input correct letter:";
         assertEquals(expected, actual);
     }
