@@ -1,5 +1,7 @@
 package project;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -10,10 +12,26 @@ public class Game {
     private final WordMask maskOperator = new WordMask();
     private String letter = "";
     private boolean giveUp = false;
+    private Scanner scanner;
+    private ByteArrayOutputStream outputStream;
+    private PrintStream stream;
+
+    public String getOut() {
+        return outputStream.toString();
+    }
+
+    public Game() {
+        scanner = new Scanner(System.in);
+    }
+
+    public Game(String in) {
+        scanner = new Scanner(in);
+        outputStream = new ByteArrayOutputStream();
+        stream = new PrintStream(outputStream);
+        System.setOut(stream);
+    }
 
     private void input() {
-        Scanner scanner = new Scanner(System.in);
-
         boolean flag = true;
         do {
             letter = scanner.nextLine();
@@ -32,17 +50,14 @@ public class Game {
         return numberGuessletter == wordUniqueLetters.size();
     }
 
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
+    public boolean start(String guessedWord) {
+
         String choice;
         int mistakesCount;
-        while (true) {
-            System.out.println("Menu: [N]ew game/ [E]xit");
-            choice = scanner.nextLine();
-            if (choice.equalsIgnoreCase("N")) {
+        if (!guessedWord.isEmpty()) {
+            while (true) {
                 mistakesCount = 0;
                 maskOperator.clearBuffer();
-                String guessedWord = wordSelector.getRandomWord();
                 maskOperator.setWord(guessedWord);
                 System.out.println("A word has been guessed!");
                 maskOperator.printMask();
@@ -81,13 +96,22 @@ public class Game {
                         break;
                     }
                 }
+                System.out.println("Menu: [N]ew game/ [E]xit");
+                choice = scanner.nextLine();
+                if (choice.equalsIgnoreCase("N")) {
+                    System.out.println("Game:");
+                    return start(new RandomWordSelector().getRandomWord());
 
-            } else if (choice.equalsIgnoreCase("Y")) {
-                System.exit(0);
+                } else if (choice.equalsIgnoreCase("E")) {
 
-            } else {
-                System.out.println("Input correct letter");
+                    return true;
+
+                } else {
+                    System.out.println("Input correct letter");
+                }
             }
+        } else {
+            return false;
         }
     }
 }
