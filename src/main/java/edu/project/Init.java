@@ -8,7 +8,7 @@ public class Init {
 
     public static void main(String[] args) {
         Game initialization = new Game();
-        RandomWordSelector WORDSELECTOR = new RandomWordSelector();
-        initialization.start(WORDSELECTOR.getRandomWord());
+        RandomWordSelector wordSelector = new RandomWordSelector();
+        initialization.start(wordSelector.getRandomWord());
     }
 }
