@@ -8,7 +8,6 @@ import java.util.Set;
 @SuppressWarnings("RegexpSinglelineJava")
 public class Game {
     final static int MISTAKES = 5;
-    private final RandomWordSelector wordSelector = new RandomWordSelector();
     private final WordMask maskOperator = new WordMask();
     private String letter = "";
     private boolean giveUp = false;

@@ -6,10 +6,9 @@ public class Init {
 
     }
 
-    private static final RandomWordSelector WORDSELECTOR = new RandomWordSelector();
-
     public static void main(String[] args) {
         Game initialization = new Game();
+        RandomWordSelector WORDSELECTOR = new RandomWordSelector();
         initialization.start(WORDSELECTOR.getRandomWord());
     }
 }
