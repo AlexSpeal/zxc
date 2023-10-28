@@ -13,27 +13,32 @@ class Task3Test {
     @Test
     @DisplayName("2 повторения слов")
     void task1() {
-        List<String> list = Arrays.asList("a", "bb", "a", "bb");
-        String actual = Task3.freqDict(list).toString();
+        var actual = Task3.freqDict(new ArrayList<>(Arrays.asList("a", "bb", "a", "bb")));
         String expected = "{a:=2, bb:=2}";
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
-    @DisplayName("Разный повторения слов")
+    @DisplayName("Разные повторения слов")
     void task2() {
-        List<String> list = Arrays.asList("this", "and", "that", "and");
-        String actual = Task3.freqDict(list).toString();
+        var actual = Task3.freqDict(new ArrayList<>(Arrays.asList("this", "and", "that", "and")));
         String expected = "{that:=1, and:=2, this:=1}";
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.toString());
     }
 
     @Test
     @DisplayName("пустая строка")
     void task3() {
-        List<String> list = Arrays.asList();
-        String actual = Task3.freqDict(list).toString();
+        var actual = Task3.freqDict(new ArrayList<>(List.of()));
         String expected = "{}";
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.toString());
+    }
+
+    @Test
+    @DisplayName("цифры")
+    void task4() {
+        var actual = Task3.freqDict(new ArrayList<>(Arrays.asList(1, 2, 3, 2, 1)));
+        String expected = "{3:=1, 2:=2, 1:=2}";
+        assertEquals(expected, actual.toString());
     }
 }
