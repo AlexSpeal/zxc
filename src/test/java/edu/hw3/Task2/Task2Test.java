@@ -1,5 +1,6 @@
-package edu.hw3;
+package edu.hw3.Task2;
 
+import edu.hw3.Task2.Task2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

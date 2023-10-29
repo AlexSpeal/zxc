@@ -1,10 +1,7 @@
 package edu.hw3.Task6;
 
-import edu.hw3.Task3;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Task6Test {
