@@ -92,15 +92,16 @@ public class Maze implements Generator, Solver {
         return maze;
     }
 
-    public void print(Maze maze, List way) {
+    public void print(Maze maze, List<Cell> way) {
         String ANSI_RESET = "\u001B[0m";
         String ANSI_RED = "\u001B[31m";
+        String ANSI_GR = "\u001B[32m";
         for (int i = 0; i < maze.getHeight(); i++) {
             for (int j = 0; j < maze.getWidth(); j++) {
                 if (maze.getGrid()[i][j].type == WALL) {
                     System.out.print("[=]");
                 }
-                if (maze.getGrid()[i][j].equals(way.get(i))) {
+                if (way.contains(maze.getGrid()[i][j] )) {
                     System.out.print(ANSI_RED + " * " + ANSI_RESET);
                 } else if (maze.getGrid()[i][j].type == PASSAGE) {
                     System.out.print("   ");
@@ -167,26 +168,38 @@ public class Maze implements Generator, Solver {
 
     @Override
     public List<Cell> solve(Maze maze, Cell start, Cell end) {
-        Queue<Cell> queue = new LinkedList<>();
+        Stack<Cell> queue = new Stack<>();
         List<Cell> result = new ArrayList<>();
-        queue.add(start);
-        Cell cell = start;
-        boolean flag = false;
-        while (!flag) {
-            cell = queue.remove();
-            for (int i = 0; i < 4 && !flag; ++i) {
-                int x = cell.getRow() + row[i];
-                int y = cell.getCol() + col[i];
-                if (maze.getGrid()[x][y].type == PASSAGE && !maze.getGrid()[x][y].isVisited()) {
-                    queue.add(new Cell(x, y, Cell.Type.PASSAGE, true));
-                    result.add(new Cell(x, y, Cell.Type.PASSAGE, true));
-                    maze.getGrid()[x][y].setVisited(true);
-                    if (queue.peek().getRow() == end.getRow() && queue.peek().getCol() == end.getCol()) {
-                        flag = true;
+
+        maze.getGrid()[start.getRow()][start.getCol()].setVisited(true);
+        Cell cell = maze.getGrid()[start.getRow()][start.getCol()];
+        queue.add(cell);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            count = 0;
+            if (cell.getRow() == end.getRow() && cell.getCol() == end.getCol()) {
+                result.addFirst(queue.pop());
+            } else {
+                for (int i = 0; i < 4; ++i) {
+                    int x = cell.getRow() + row[i];
+                    int y = cell.getCol() + col[i];
+                    if (maze.getGrid()[x][y].type == PASSAGE && !maze.getGrid()[x][y].isVisited()) {
+                        ++count;
+                        queue.add(maze.getGrid()[x][y]);
+                        maze.getGrid()[x][y].setVisited(true);
+                        cell = queue.peek();
+
                     }
+
+                }
+                if (count == 0) {
+                    queue.pop();
+                    cell = queue.peek();
                 }
             }
         }
+        result.reversed();
+
         return result;
     }
 }
