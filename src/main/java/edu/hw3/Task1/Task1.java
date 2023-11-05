@@ -9,10 +9,10 @@ public class Task1 {
     private Task1() {
     }
 
-    final static int LEFTA = 65;
-    final static int RIGHTA = 90;
-    final static int LEFTB = 97;
-    final static int RIGHTB = 122;
+    final static int LEFT_BORDER_UPPERCASE = 65;
+    final static int RIGHT_BORDER_UPPERCASE = 90;
+    final static int LEFT_BORDER_LOWERCASE = 97;
+    final static int RIGHT_BORDER_LOWERCASE = 122;
     private final static org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
     private static HashMap<Character, Character> hashMap;
@@ -33,7 +33,8 @@ public class Task1 {
         encoder();
         String str = s;
         for (int i = 0; i < s.length(); i++) {
-            if ((s.charAt(i) >= LEFTA && s.charAt(i) <= RIGHTA) || (s.charAt(i) >= LEFTB && s.charAt(i) <= RIGHTB)) {
+            if ((s.charAt(i) >= LEFT_BORDER_UPPERCASE && s.charAt(i) <= RIGHT_BORDER_UPPERCASE)
+                || (s.charAt(i) >= LEFT_BORDER_LOWERCASE && s.charAt(i) <= RIGHT_BORDER_LOWERCASE)) {
                 str = str.substring(0, i) + hashMap.get(str.charAt(i)) + str.substring(i + 1);
             }
         }

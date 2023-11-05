@@ -24,8 +24,8 @@ public class Task4 {
     final static int THOUSAND = 1000;
     final static int BORDER = 3999;
 
-    public static LinkedHashMap<Integer, String> dictionary() {
-        LinkedHashMap<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>();
+    public static Map<Integer, String> dictionary() {
+        Map<Integer, String> linkedHashMap = new LinkedHashMap<Integer, String>();
         linkedHashMap.put(THOUSAND, "M");
         linkedHashMap.put(NINEHUNDRED, "CM");
         linkedHashMap.put(FIVEHUNDRED, "D");
@@ -43,7 +43,7 @@ public class Task4 {
     }
 
     public static String convertToRoman(int number) throws Exception {
-        LinkedHashMap<Integer, String> dictionary = dictionary();
+        Map<Integer, String> dictionary = dictionary();
         StringBuilder result = new StringBuilder();
         int num = number;
         int key;

@@ -1,6 +1,7 @@
 package edu.hw3.Task2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import org.apache.logging.log4j.LogManager;
 
@@ -27,9 +28,9 @@ public class Task2 {
         return str1;
     }
 
-    public static ArrayList<String> cluster(String str) {
+    public static List<String> cluster(String str) {
 
-        ArrayList<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         String res = "";
         String str2 = str;
         Stack<Character> stack = new Stack<>();
@@ -57,7 +58,7 @@ public class Task2 {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> x = cluster("((())())(()(()()))");
+        List<String> x = cluster("((())())(()(()()))");
         for (String s : x) {
             LOGGER.info(s);
         }
