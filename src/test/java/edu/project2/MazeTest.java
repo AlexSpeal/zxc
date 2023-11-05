@@ -2,6 +2,7 @@ package edu.project2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MazeTest {
@@ -12,7 +13,7 @@ class MazeTest {
         boolean actual = false;
         boolean expected = false;
         try {
-            maze = maze.generate(33, 33);
+            maze = maze.generate(5, 5);
         } catch (RuntimeException e) {
             actual = true;
         }
@@ -31,6 +32,49 @@ class MazeTest {
             actual = true;
         }
         assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Поиск пути")
+    void test3() {
+        StringBuilder test = new StringBuilder(
+            "00000"
+                + "01110"
+                + "01010"
+                + "01010"
+                + "00000");
+        Maze maze = new Maze();
+        maze = maze.generate(5, 5, test);
+        Cell start = new Cell(1, 1, Cell.Type.PASSAGE, false);
+        Cell finish = new Cell(3, 3, Cell.Type.PASSAGE, false);
+        StringBuilder actual = maze.print(maze.solve(maze, start, finish));
+        StringBuilder expected = new StringBuilder("[=][=][=][=][=]\n" +
+            "[=]\u001B[31m * \u001B[0m\u001B[31m * \u001B[0m\u001B[31m * \u001B[0m[=]\n" +
+            "[=]   [=]\u001B[31m * \u001B[0m[=]\n" +
+            "[=]   [=]\u001B[31m * \u001B[0m[=]\n" +
+            "[=][=][=][=][=]\n");
+        assertTrue(actual.toString().contentEquals(expected));
+    }
+
+    @Test
+    @DisplayName("Вывод лабиринта")
+    void test4() {
+        StringBuilder test = new StringBuilder(
+            "00000"
+                + "01110"
+                + "01010"
+                + "01010"
+                + "00000");
+        Maze maze = new Maze();
+        maze = maze.generate(5, 5, test);
+        StringBuilder actual = maze.print();
+        StringBuilder expected = new StringBuilder(
+            "[=][=][=][=][=]\n"
+                + "[=]         [=]\n"
+                + "[=]   [=]   [=]\n"
+                + "[=]   [=]   [=]\n"
+                + "[=][=][=][=][=]\n");
+        assertTrue(actual.toString().contentEquals(expected));
     }
 
 }

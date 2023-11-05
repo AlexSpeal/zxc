@@ -180,6 +180,23 @@ public class Maze implements Generator, Solver, Render {
     }
 
     @Override
+    public Maze generate(int height, int width, StringBuilder test) {
+        Maze maze = generateM(height, width);
+        int k = 0;
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                if (test.charAt(k) == '0') {
+                    maze.getGrid()[i][j] = new Cell(i, j, WALL, false);
+                } else if (test.charAt(k) == '1') {
+                    maze.getGrid()[i][j] = new Cell(i, j, PASSAGE, false);
+                }
+                ++k;
+            }
+        }
+        return maze;
+    }
+
+    @Override
     public List<Cell> solve(Maze maze, Cell start, Cell end) {
         if (maze.getGrid()[start.getRow()][start.getCol()].type == WALL
             || maze.getGrid()[end.getRow()][end.getCol()].type == WALL) {
