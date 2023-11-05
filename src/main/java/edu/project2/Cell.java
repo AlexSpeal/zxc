@@ -2,10 +2,10 @@ package edu.project2;
 
 public class Cell {
 
-    public enum Type {WALL, PASSAGE}
+    public enum Type { WALL, PASSAGE }
 
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private boolean isVisited;
     Type type;
 
@@ -20,16 +20,8 @@ public class Cell {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public int getCol() {
         return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
     }
 
     public boolean isVisited() {

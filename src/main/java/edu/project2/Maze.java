@@ -1,25 +1,30 @@
 package edu.project2;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Stack;
 import static edu.project2.Cell.Type.PASSAGE;
 import static edu.project2.Cell.Type.WALL;
 
-public class Maze implements Generator, Solver {
+public class Maze implements Generator, Solver, Render {
     private int height;
     private int width;
     private Cell[][] grid;
-    private static final int[] row = {-1, 0, 0, 1};
-    private static final int[] col = {0, -1, 1, 0};
+    private static final int[] ROW = {-1, 0, 0, 1};
+    private static final int[] COL = {0, -1, 1, 0};
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+    private static final String WALLS = "[=]";
+    private static final String PASSAGES = "   ";
 
     Maze() {
     }
 
     Maze(int height, int width, Cell[][] grid) {
+        if (height <= 0 || width <= 0 || grid == null) {
+            throw new RuntimeException("Введены некорректные значения!");
+        }
         this.height = height;
         this.width = width;
         this.grid = grid;
@@ -39,15 +44,12 @@ public class Maze implements Generator, Solver {
 
     private Maze generateM(int height, int width) {
         Cell[][] cell = new Cell[height][width];
-        //создаем матрицу - двумерный массив
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if ((i % 2 != 0 && j % 2 != 0) && //если ячейка нечетная по x и y,
-                    (i < height - 1 && j < width - 1))   //и при этом находится в пределах стен лабиринта
-                {
-                    cell[i][j] = new Cell(i, j, PASSAGE, false); //то это КЛЕТКА
+                if ((i % 2 != 0 && j % 2 != 0) && (i < height - 1 && j < width - 1)) {
+                    cell[i][j] = new Cell(i, j, PASSAGE, false);
                 } else {
-                    cell[i][j] = new Cell(i, j, WALL, false);           //в остальных случаях это СТЕНА.
+                    cell[i][j] = new Cell(i, j, WALL, false);
                 }
             }
         }
@@ -58,19 +60,17 @@ public class Maze implements Generator, Solver {
         int x = cell.getRow();
         int y = cell.getCol();
 
-        Cell up = (x >= 3 ? maze.getGrid()[x - 2][y] : maze.getGrid()[x][y]);
-        Cell rt = (y < maze.getWidth() - 3 ? maze.getGrid()[x][y + 2] : maze.getGrid()[x][y]);
-        Cell dw = (x < maze.getHeight() - 3 ? maze.getGrid()[x + 2][y] : maze.getGrid()[x][y]);
-        Cell lt = (y >= 3 ? maze.getGrid()[x][y - 2] : maze.getGrid()[x][y]);
+        Cell up = (x >= THREE ? maze.getGrid()[x - 2][y] : maze.getGrid()[x][y]);
+        Cell rt = (y < maze.getWidth() - THREE ? maze.getGrid()[x][y + 2] : maze.getGrid()[x][y]);
+        Cell dw = (x < maze.getHeight() - THREE ? maze.getGrid()[x + 2][y] : maze.getGrid()[x][y]);
+        Cell lt = (y >= THREE ? maze.getGrid()[x][y - 2] : maze.getGrid()[x][y]);
         Cell[] neighboursArray = {dw, rt, up, lt};
         List<Cell> neighboursList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            if (neighboursArray[i] != maze.getGrid()[x][y] && neighboursArray[i].getRow() > 0 &&
-                neighboursArray[i].getRow() < maze.getWidth() &&
-                neighboursArray[i].getCol() > 0 &&
-                neighboursArray[i].getCol() < maze.getHeight()) { //если не выходит за границы лабиринта
-                if (neighboursArray[i].type == PASSAGE &&
-                    !neighboursArray[i].isVisited()) { //и не посещена\является стеной
+        for (int i = 0; i < FOUR; i++) {
+            if (neighboursArray[i] != maze.getGrid()[x][y] && neighboursArray[i].getRow() > 0
+                && neighboursArray[i].getRow() < maze.getWidth() && neighboursArray[i].getCol() > 0
+                && neighboursArray[i].getCol() < maze.getHeight()) {
+                if (neighboursArray[i].type == PASSAGE && !neighboursArray[i].isVisited()) {
                     neighboursList.add(neighboursArray[i]);
                 }
             }
@@ -78,37 +78,55 @@ public class Maze implements Generator, Solver {
         return neighboursList;
     }
 
-    private Maze removeWall(Cell currentCell, Cell neighbourCell, Maze maze) {
+    private void removeWall(Cell currentCell, Cell neighbourCell, Maze maze) {
 
         int xDiff = neighbourCell.getRow() - currentCell.getRow();
         int yDiff = neighbourCell.getCol() - currentCell.getCol();
-        int addX, addY;
+        int addX;
+        int addY;
 
         addX = (xDiff != 0) ? (xDiff / Math.abs(xDiff)) : 0;
         addY = (yDiff != 0) ? (yDiff / Math.abs(yDiff)) : 0;
 
         maze.getGrid()[currentCell.getRow() + addX][currentCell.getCol() + addY].type = PASSAGE;
         maze.getGrid()[currentCell.getRow() + addX][currentCell.getCol() + addY].setVisited(true);
-        return maze;
     }
 
-    public void print(Maze maze, List<Cell> way) {
-        String ANSI_RESET = "\u001B[0m";
-        String ANSI_RED = "\u001B[31m";
-        String ANSI_GR = "\u001B[32m";
-        for (int i = 0; i < maze.getHeight(); i++) {
-            for (int j = 0; j < maze.getWidth(); j++) {
-                if (maze.getGrid()[i][j].type == WALL) {
-                    System.out.print("[=]");
-                }
-                if (way.contains(maze.getGrid()[i][j] )) {
-                    System.out.print(ANSI_RED + " * " + ANSI_RESET);
-                } else if (maze.getGrid()[i][j].type == PASSAGE) {
-                    System.out.print("   ");
+    @Override
+    public StringBuilder print() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (grid[i][j].type == WALL) {
+                    result.append(WALLS);
+                } else if (grid[i][j].type == PASSAGE) {
+                    result.append(PASSAGES);
                 }
             }
-            System.out.println();
+            result.append("\n");
         }
+        return result;
+    }
+
+    @Override
+    public StringBuilder print(List<Cell> way) {
+        String ansiReset = "\u001B[0m";
+        String ansiRed = "\u001B[31m";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (grid[i][j].type == WALL) {
+                    result.append(WALLS);
+                }
+                if (way.contains(grid[i][j])) {
+                    result.append(ansiRed).append(" * ").append(ansiReset);
+                } else if (grid[i][j].type == PASSAGE) {
+                    result.append(PASSAGES);
+                }
+            }
+            result.append("\n");
+        }
+        return result;
 
     }
 
@@ -124,7 +142,7 @@ public class Maze implements Generator, Solver {
         return count;
     }
 
-    private Maze unvisitedClean(Maze maze) {
+    private void unvisitedClean(Maze maze) {
         for (int i = 0; i < maze.getHeight(); i++) {
             for (int j = 0; j < maze.getWidth(); j++) {
                 if (maze.getGrid()[i][j].isVisited() && maze.getGrid()[i][j].type == PASSAGE) {
@@ -132,7 +150,6 @@ public class Maze implements Generator, Solver {
                 }
             }
         }
-        return maze;
     }
 
     @Override
@@ -143,62 +160,61 @@ public class Maze implements Generator, Solver {
         Stack<Cell> neighboursStack = new Stack<>();
         Random random;
         do {
-            List<Cell> Neighbours = getNeighbours(maze, currentCell);
-            if (!Neighbours.isEmpty()) { //если у клетки есть непосещенные соседи
+            List<Cell> neighbours = getNeighbours(maze, currentCell);
+            if (!neighbours.isEmpty()) {
                 random = new Random();
-                int randoms = random.nextInt(0, Neighbours.size()); //тут починить если сломается
-                neighbourCell = Neighbours.get(randoms); //выбираем случайного соседа
+                int randoms = random.nextInt(0, neighbours.size());
+                neighbourCell = neighbours.get(randoms);
                 neighboursStack.push(neighbourCell);
-                maze = removeWall(currentCell, neighbourCell, maze); //убираем стену между текущей и соседней точками
-                currentCell = neighbourCell; //делаем соседнюю точку текущей и отмечаем ее посещенной
+                removeWall(currentCell, neighbourCell, maze);
+                currentCell = neighbourCell;
                 maze.getGrid()[currentCell.getRow()][currentCell.getCol()].setVisited(true);
             } else if (!neighboursStack.isEmpty()) {
                 neighboursStack.pop();
-                // if (neighboursStack.isEmpty()) {
-                //  print(maze);
-                //break;
-                // }
                 currentCell = maze.getGrid()[neighboursStack.peek().getRow()][neighboursStack.peek().getCol()];
             }
         } while (unvisitedCount(maze) > 0);
-        maze = unvisitedClean(maze);
+        unvisitedClean(maze);
         neighboursStack.clear();
         return maze;
     }
 
     @Override
     public List<Cell> solve(Maze maze, Cell start, Cell end) {
-        Stack<Cell> queue = new Stack<>();
+        if (maze.getGrid()[start.getRow()][start.getCol()].type == WALL
+            || maze.getGrid()[end.getRow()][end.getCol()].type == WALL) {
+            throw new RuntimeException("Точки не могут быть стенами!");
+        }
+        Stack<Cell> stack = new Stack<>();
         List<Cell> result = new ArrayList<>();
 
         maze.getGrid()[start.getRow()][start.getCol()].setVisited(true);
         Cell cell = maze.getGrid()[start.getRow()][start.getCol()];
-        queue.add(cell);
-        int count = 0;
-        while (!queue.isEmpty()) {
+        stack.add(cell);
+        int count;
+        while (!stack.isEmpty()) {
             count = 0;
             if (cell.getRow() == end.getRow() && cell.getCol() == end.getCol()) {
-                result.addFirst(queue.pop());
+                result.addFirst(stack.pop());
             } else {
-                for (int i = 0; i < 4; ++i) {
-                    int x = cell.getRow() + row[i];
-                    int y = cell.getCol() + col[i];
+                for (int i = 0; i < FOUR; ++i) {
+                    int x = cell.getRow() + ROW[i];
+                    int y = cell.getCol() + COL[i];
                     if (maze.getGrid()[x][y].type == PASSAGE && !maze.getGrid()[x][y].isVisited()) {
                         ++count;
-                        queue.add(maze.getGrid()[x][y]);
+                        stack.add(maze.getGrid()[x][y]);
                         maze.getGrid()[x][y].setVisited(true);
-                        cell = queue.peek();
+                        cell = stack.peek();
 
                     }
 
                 }
                 if (count == 0) {
-                    queue.pop();
-                    cell = queue.peek();
+                    stack.pop();
+                    cell = stack.peek();
                 }
             }
         }
-        result.reversed();
 
         return result;
     }
