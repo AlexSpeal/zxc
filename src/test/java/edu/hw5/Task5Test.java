@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Task5Test {
     @ParameterizedTest
-    @ValueSource(strings = {"А123ВЕ777", "О777ОО177", "О888ОО167", "В456ВЕ678"})
+    @ValueSource(strings = {"А123ВЕ777", "О777ОО177", "О888ОО167", "В456ВЕ678","В456ВЕ67"})
     @DisplayName("Правильный номер")
     void isValid(String strings) {
         boolean actual = Task5.isCarNumber(strings, Task5.carNumberPattern);
