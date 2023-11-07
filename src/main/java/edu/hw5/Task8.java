@@ -20,4 +20,8 @@ public class Task8 {
     //каждый нечетный символ равен 1
     public static final Pattern stringPattern5 =
         Pattern.compile("^(1([01]{0,1}))+$");
+
+    //нет последовательных 1
+    public static final Pattern stringPattern6 =
+        Pattern.compile("^(?![01]*1{2})[01]*$");
 }
