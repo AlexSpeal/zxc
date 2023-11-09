@@ -14,7 +14,7 @@ public class BackwardIterator<T> implements Iterator<T> {
             this.collection = collection;
             index = collection.size() - 1;
         } else {
-            throw new NoSuchElementException();
+            throw new NullPointerException();
         }
     }
 
@@ -26,7 +26,7 @@ public class BackwardIterator<T> implements Iterator<T> {
     @Override
     public T next() {
         if (!hasNext()) {
-            return null;
+            throw new NoSuchElementException();
         }
         T[] elem = (T[]) new Object[collection.size()];
         collection.toArray(elem);
