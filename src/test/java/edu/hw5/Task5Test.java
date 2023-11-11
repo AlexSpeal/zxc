@@ -11,7 +11,7 @@ class Task5Test {
     @ValueSource(strings = {"А123ВЕ777", "О777ОО177", "О888ОО167", "В456ВЕ678","В456ВЕ67"})
     @DisplayName("Правильный номер")
     void isValid(String strings) {
-        boolean actual = Task5.isCarNumber(strings, Task5.carNumberPattern);
+        boolean actual = Task5.isCarNumber(strings);
         assertTrue(actual);
 
     }
@@ -20,7 +20,7 @@ class Task5Test {
     @ValueSource(strings = {"123АВЕ777", "А123ВГ77", "А123ВЕ7777"})
     @DisplayName("Неправильный номер")
     void isNotValid(String strings) {
-        boolean actual = Task5.isCarNumber(strings, Task5.carNumberPattern);
+        boolean actual = Task5.isCarNumber(strings);
         assertFalse(actual);
 
     }
@@ -28,14 +28,14 @@ class Task5Test {
     @Test
     @DisplayName("Пустой номер")
     void empty() {
-        boolean actual = Task5.isCarNumber(" ", Task5.carNumberPattern);
+        boolean actual = Task5.isCarNumber(" ");
         assertFalse(actual);
     }
 
     @Test
     @DisplayName("Null строка")
     void nullString() {
-        boolean actual = Task5.isCarNumber(null, Task5.carNumberPattern);
+        boolean actual = Task5.isCarNumber(null);
         assertFalse(actual);
     }
 }

@@ -8,20 +8,16 @@ public class Task4 {
 
     }
 
-    public static final Pattern passwordPattern = Pattern.compile("[~!@#$%^&*|]");
+    public static final Pattern PASSWORD_PATTERN = Pattern.compile("[~!@#$%^&*|]");
 
-    public static boolean isPassword(String password, Pattern passwordPattern) {
+    public static boolean isPassword(String password) {
         boolean result = false;
         if (password != null) {
-            Matcher matcher = passwordPattern.matcher(password);
+            Matcher matcher = PASSWORD_PATTERN.matcher(password);
             if (matcher.find()) {
                 result = true;
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.print(isPassword("asdasdfasfafsdfs dsfsd", passwordPattern));
     }
 }

@@ -10,7 +10,7 @@ public class Task6 {
 
     public static boolean isSubsequence(String subsequence, String str) {
         boolean result = false;
-        if (str != null || subsequence != null) {
+        if (str != null && subsequence != null) {
             String[] subsequent = subsequence.split("");
             StringBuilder patern = new StringBuilder();
             for (String i : subsequent) {
@@ -24,9 +24,5 @@ public class Task6 {
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.print(isSubsequence("abc", "achfdbaabgabcaabg"));
     }
 }

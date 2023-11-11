@@ -1,25 +1,48 @@
 package edu.hw5;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Task1 {
     private Task1() {
 
     }
-private static final String baseTime= """
-    2022-03-12, 20:20 - 2022-03-12, 23:50
-    2022-04-01, 21:30 - 2022-04-02, 01:20
-    """;
 
-    private static final Pattern datePatten=Pattern.compile("\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2}");
-    private static List<Map<String,Object>> parseString(String baseTime){
+    final static int SECOND_DATE = 5;
+    final static int FIRST_DATE = 1;
+    public static final Pattern DATA_PATTERN = Pattern.compile("^(\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\\d|3[0-1]),"
+        + " ([0-1]\\d|2[0-4]):[0-5]\\d) - (\\d{4}-(0[1-9]|1[0-2])"
+        + "-(0[1-9]|[1-2]\\d|3[0-1]), ([0-1]\\d|2[0-4]):[0-5]\\d)$");
 
+    public static Duration getDuration(List<String> baseTime) {
+        SimpleDateFormat formatter = new SimpleDateFormat("y-MM-dd, HH:mm");
+        int sessionCount = 0;
+        int fullDuration = 0;
+        if (baseTime.isEmpty()) {
+            throw new RuntimeException("the passed values are empty");
+        }
+        for (String session : baseTime) {
+            Matcher matcher = DATA_PATTERN.matcher(session);
 
-        return null;
-    }
-    public static void main(String[] args) {
-        //System.out.print(durationTime());
+            if (matcher.find()) {
+                try {
+                    Date first = formatter.parse(matcher.group(FIRST_DATE));
+                    Date end = formatter.parse(matcher.group(SECOND_DATE));
+                    fullDuration += (int) Duration.between(first.toInstant(), end.toInstant()).getSeconds();
+                    ++sessionCount;
+                } catch (ParseException e) {
+                    throw new RuntimeException("Parse Exeption");
+                }
+
+            } else {
+                throw new RuntimeException("Invalid data format");
+            }
+        }
+        return Duration.ofSeconds((long) fullDuration / sessionCount);
     }
 }

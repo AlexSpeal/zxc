@@ -1,5 +1,6 @@
 package edu.hw5;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Task8 {
@@ -8,20 +9,27 @@ public class Task8 {
     }
 
     //нечетной длины
-    public static final Pattern stringPattern1 =
+    public static final Pattern STRING_PATTERN_1 =
         Pattern.compile("^[01]([01]{2})*$");
     //начинается с 0 и имеет нечетную длину, или начинается с 1 и имеет четную длину
-    public static final Pattern stringPattern2 =
+    public static final Pattern STRING_PATTERN_2 =
         Pattern.compile("(^0([01]{2})*$)|(^(?=1)([01]{2})+$)");
-    //любая строка, кроме 11 или 111
-    public static final Pattern stringPattern4 =
-        Pattern.compile("(^(1{2}|1{3})[01]{2,}$)|(^0[01]*$)|(^1$)|(^$)");
-
     //каждый нечетный символ равен 1
-    public static final Pattern stringPattern5 =
-        Pattern.compile("^(1([01]{0,1}))+$");
+    public static final Pattern STRING_PATTERN_3 =
+        Pattern.compile("^(1([01]?))+$");
 
     //нет последовательных 1
-    public static final Pattern stringPattern6 =
+    public static final Pattern STRING_PATTERN_4 =
         Pattern.compile("^(?![01]*1{2})[01]*$");
+
+    public static boolean isValidString(String str, Pattern stringPattern) {
+        boolean result = false;
+        if (str != null) {
+            Matcher matcher = stringPattern.matcher(str);
+            if (matcher.find()) {
+                result = true;
+            }
+        }
+        return result;
+    }
 }

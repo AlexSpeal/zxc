@@ -8,21 +8,17 @@ public class Task5 {
 
     }
 
-    public static final Pattern carNumberPattern =
+    public static final Pattern CAR_NUMBER_PATTERN =
         Pattern.compile("^[АВЕКМНОРСТУХ]\\d{3}(?<!000)[АВЕКМНОРСТУХ]{2}\\d{2,3}$");
 
-    public static boolean isCarNumber(String carNumber, Pattern carNumberPattern) {
+    public static boolean isCarNumber(String carNumber) {
         boolean result = false;
         if (carNumber != null) {
-            Matcher matcher = carNumberPattern.matcher(carNumber);
+            Matcher matcher = CAR_NUMBER_PATTERN.matcher(carNumber);
             if (matcher.find()) {
                 result = true;
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.print(isCarNumber("А123ВЕ777", carNumberPattern));
     }
 }
