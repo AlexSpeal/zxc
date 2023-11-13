@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Task4Test {
     @ParameterizedTest
     @ValueSource(strings = {"~qwerty~", "!qwerty!", "@qwerty@", "#qwerty#", "$qwerty$",
-        "%qwerty%", "^qwerty^", "&qwerty&", "*qwerty*", "|qwerty|", "qwerty~ ! @ # $ % ^ & * |"})
+        "%qwerty%", "^qwerty^", "&qwerty&", "*qwerty*", "|qwerty|", "qwerty~!@#$%^&*|"})
     @DisplayName("Пароль содержит требуемые символы")
     void isValid(String strings) {
         boolean actual = Task4.isPassword(strings);

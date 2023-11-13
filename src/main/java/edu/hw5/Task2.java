@@ -16,13 +16,11 @@ public class Task2 {
     final static int FIRST_MONTH = 1;
     final static int THIRD_GROUP = 3;
     final static int THIRTEENTH_MONTH = 13;
-    final static int MIN_YEAR = 1000;
-    final static int MAX_YEAR = 9999;
-    public static final Pattern DATA_PATTERN = Pattern.compile("^(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\\d|3[0-1])$");
+    public static final Pattern DATA_PATTERN = Pattern.compile("^(0|[1-9]\\d*)-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\\d|3[0-1])$");
 
     public static List<LocalDate> getFridaysOnYear(int year) {
         List<LocalDate> result = new ArrayList<>();
-        if (year >= MIN_YEAR && year <= MAX_YEAR) {
+        if (year >=0) {
             LocalDate resultDate = LocalDate.of(year, FIRST_MONTH, THIRTEENTH_MONTH);
             while (resultDate.getYear() == year) {
                 if (resultDate.getDayOfWeek() == DayOfWeek.FRIDAY) {
