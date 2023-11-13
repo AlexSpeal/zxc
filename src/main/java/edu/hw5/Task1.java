@@ -17,7 +17,7 @@ public class Task1 {
     final static int FIRST_DATE = 1;
     public static final Pattern DATA_PATTERN = Pattern.compile("^(\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\\d|3[0-1]),"
         + " ([0-1]\\d|2[0-4]):[0-5]\\d) - (\\d{4}-(0[1-9]|1[0-2])"
-        + "-(0[1-9]|[1-2]\\d|3[0-1]), ([0-1]\\d|2[0-4]):[0-5]\\d)$");
+        + "-(0[1-9]|[1-2]\\d|3[0-1]), ([0-1]\\d|2[0-4]):[0-5]\\d)$"); //2004-09-10
 
     public static Duration getDuration(List<String> baseTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("y-MM-dd, HH:mm");
