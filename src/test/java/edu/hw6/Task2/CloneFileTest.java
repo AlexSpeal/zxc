@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static edu.hw6.Task1.DiskMapTest.deleteDirectory;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,12 +39,12 @@ public class CloneFileTest {
         assertThat(Files.exists(newPath)).isTrue();
         assertThat(Files.readString(newPath)).isEqualTo("test");
     }
+
     @Test
     @DisplayName("файла не существует")
-    void notFile() throws IOException {
+    void notFile() {
         Path path = Path.of("aboba", "test");
-        CloneFile.cloneFile(path);
-
+        assertThrows(RuntimeException.class, () -> CloneFile.cloneFile(path));
     }
 
     @Test
