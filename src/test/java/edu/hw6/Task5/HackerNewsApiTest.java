@@ -1,6 +1,5 @@
 package edu.hw6.Task5;
 
-import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
