@@ -17,16 +17,13 @@ public class Task4 {
     // в 10млн симуляций - 0.0005818032799895789
     // в 100млн симуляций - 0.0002598879364823503
     // в 1млрд симуляций - 0.00002120297666241555
-    //10000000
     public static void main(String[] args) {
         var first = System.nanoTime();
         System.out.printf("One Thread PI: %s%n", oneThreadPI(10000000));
         var second = System.nanoTime() - first;
-        //System.out.println(second);
         first = System.nanoTime();
         System.out.printf("Multi Thread PI: %s%n", multiThreadPI(10000000));
         var second1 = System.nanoTime() - first;
-        //System.out.println(second1);
         System.out.println((double) second / second1);
         System.out.println(Math.abs(multiThreadPI(10000000) - Math.PI));
     }
