@@ -3,15 +3,19 @@ package edu.hw8;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import edu.hw8.Task1.Client;
+import edu.hw8.Task1.Server;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class Main {
-    private Main() {
+public class Task1Test {
 
-    }
+    private List<String> list = List.of("личности", "оскорбления", "глупый", "интеллект");
 
-    private static final List<String> list = List.of("личности", "оскорбления", "глупый", "интеллект");
+    @Test
+    @DisplayName("Сервер и клиенты общаются")
+    void test1() throws InterruptedException, IOException {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
         Server server = new Server(4);
         Thread thread = new Thread(() -> {
             try {
@@ -29,9 +33,7 @@ public class Main {
         client.sendToServer(list.get(ThreadLocalRandom.current().nextInt(4)));
         client.readFromServer();
         try {
-
             client.close();
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

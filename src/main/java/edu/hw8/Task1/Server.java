@@ -1,4 +1,4 @@
-package edu.hw8;
+package edu.hw8.Task1;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -20,8 +20,10 @@ public class Server implements AutoCloseable {
     private Selector selector;
     private ExecutorService executorService;
     private BlockingQueue<SocketChannel> blockingQueue;
+    final static int BUFFER_SIZE = 256;
+    final static int TIME_FOR_SLEEPING = 1000;
 
-    Server(int countOfThreads) {
+    public Server(int countOfThreads) {
         executorService = Executors.newFixedThreadPool(countOfThreads);
         blockingQueue = new LinkedBlockingDeque<>(countOfThreads);
     }
@@ -32,7 +34,7 @@ public class Server implements AutoCloseable {
         serverSocket.bind(new InetSocketAddress("localhost", port));
         serverSocket.configureBlocking(false);
         serverSocket.register(selector, SelectionKey.OP_ACCEPT);
-        ByteBuffer byteBuffer = ByteBuffer.allocate(256);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(BUFFER_SIZE);
         while (selector.isOpen()) {
             selector.select();
             if (selector.isOpen()) {
@@ -57,7 +59,7 @@ public class Server implements AutoCloseable {
                                 throw new RuntimeException(e);
                             }
                         });
-                        Thread.sleep(1000);
+                        Thread.sleep(TIME_FOR_SLEEPING);
 
                     }
                     iter.remove();
@@ -77,35 +79,22 @@ public class Server implements AutoCloseable {
 
     public void answer(ByteBuffer byteBuffer, SelectionKey key) throws IOException {
         SocketChannel client = (SocketChannel) key.channel();
-        int read = client.read(byteBuffer);
+        client.read(byteBuffer);
         byteBuffer.flip();
-        var x=getAnswer(byteBuffer);
-        client.write(x);
-        byteBuffer.clear();
+        client.write(getAnswer(byteBuffer));
         client.close();
         blockingQueue.remove(client);
-        /*SocketChannel client = (SocketChannel) key.channel();
-        int r = client.read(byteBuffer);
-        while (r != -1) {
-            byteBuffer.flip();
-            while (byteBuffer.hasRemaining()) {
-                client.write(getAnswer(byteBuffer));
-            }
-            byteBuffer.clear();
-            r = client.read(byteBuffer);
-        }
-        client.close();
-        blockingQueue.remove(client);*/
     }
 
     private ByteBuffer getAnswer(ByteBuffer byteBuffer) {
         String currentData = UTF_8.decode(byteBuffer).toString().trim();
+        byteBuffer.position(0);
         String answer = "Error\n";
         if (Dictionary.DICTIONARY.containsKey(currentData)) {
             answer = Dictionary.DICTIONARY.get(currentData) + '\n';
         }
-        //return  ByteBuffer.wrap(UTF_8.encode(answer).array());
-        return ByteBuffer.wrap(UTF_8.encode(answer).array());
+        byteBuffer.put(UTF_8.encode(answer).array());
+        return byteBuffer.position(0);
     }
 
     @Override public void close() throws Exception {
