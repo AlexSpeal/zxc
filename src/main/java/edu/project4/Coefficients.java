@@ -2,7 +2,7 @@ package edu.project4;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public record Coefficients(double a, double b, double c, double d, double e, double f) {
+public record Coefficients(double a, double b, double c, double d, double e, double f, RGB rgb) {
     public static Coefficients randomCoefficients() {
         while (true) {
             double a = ThreadLocalRandom.current().nextDouble(-1.0, 1.0);
@@ -12,7 +12,7 @@ public record Coefficients(double a, double b, double c, double d, double e, dou
             double e = ThreadLocalRandom.current().nextDouble(-1.0, 1.0);
             double f = ThreadLocalRandom.current().nextDouble(-1.0, 1.0);
             if (isCoefValid(a, b, c, d, e, f)) {
-                return new Coefficients(a, b, c, d, e, f);
+                return new Coefficients(a, b, c, d, e, f, new RGB());
             }
         }
     }

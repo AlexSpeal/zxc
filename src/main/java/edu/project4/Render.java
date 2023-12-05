@@ -38,55 +38,36 @@ public class Render {
                 //Fractal function = fractalList.get(randFunc);
                 //point = function.apply(point);
                 if (step >= 0 && containedInTheArea(point)) {
-                   /* double theta = 0;
+                    double theta = 0;
                     for (int s = 0; s < symmetry; ++s) {
                         theta += 2 * Math.PI / symmetry;
-                        point = getRotatedPoint(point, theta);*/
-                    double xInCanvas = (point.x() - X_MIN) / (X_MAX - X_MIN) * RES_X;
-                    double yInCanvas = (point.y() - Y_MIN) / (Y_MAX - Y_MIN) * RES_Y;
-                    if (!canvas.contains(xInCanvas, yInCanvas)) {
-                        continue;
+                        point = getRotatedPoint(point, theta);
+                        double xInCanvas = (point.x() - X_MIN) / (X_MAX - X_MIN) * RES_X;
+                        double yInCanvas = (point.y() - Y_MIN) / (Y_MAX - Y_MIN) * RES_Y;
+                        if (!canvas.contains(xInCanvas, yInCanvas)) {
+                            continue;
+                        }
+                        int x = (int) xInCanvas;
+                        int y = (int) yInCanvas;
+                        if (canvas.getData()[x][y].getCountHit() == 0) {
+                            canvas.getData()[x][y].getRgb().setBlue(coefficients[randCoeff].rgb().getBlue());
+                            canvas.getData()[x][y].getRgb().setRed(coefficients[randCoeff].rgb().getRed());
+                            canvas.getData()[x][y].getRgb().setGreen(coefficients[randCoeff].rgb().getGreen());
+                        } else {
+                            canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
+                                + coefficients[randCoeff].rgb().getBlue()) / 2);
+                            canvas.getData()[x][y].getRgb().setRed((canvas.getData()[x][y].getRgb().getRed()
+                                + coefficients[randCoeff].rgb().getRed()) / 2);
+                            canvas.getData()[x][y].getRgb().setGreen((canvas.getData()[x][y].getRgb().getGreen()
+                                + coefficients[randCoeff].rgb().getGreen()) / 2);
+                        }
+                        canvas.getData()[x][y].incrementCountHit();
                     }
-                    int x = (int) xInCanvas;
-                    int y = (int) yInCanvas;
-                    if (canvas.getData()[x][y].getCountHit() == 0) {
-                        canvas.getData()[x][y].getRgb().setBlue(coefficients[randCoeff].rgb().getBlue());
-                        canvas.getData()[x][y].getRgb().setRed(coefficients[randCoeff].rgb().getRed());
-                        canvas.getData()[x][y].getRgb().setGreen(coefficients[randCoeff].rgb().getGreen());
-                    } else {
-                        canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
-                            + coefficients[randCoeff].rgb().getBlue()) / 2);
-                        canvas.getData()[x][y].getRgb().setRed((canvas.getData()[x][y].getRgb().getRed()
-                            + coefficients[randCoeff].rgb().getRed()) / 2);
-                        canvas.getData()[x][y].getRgb().setGreen((canvas.getData()[x][y].getRgb().getGreen()
-                            + coefficients[randCoeff].rgb().getGreen()) / 2);
-                    }
-                    canvas.getData()[x][y].incrementCountHit();
+                    //}
                 }
-                //}
             }
         }
-    }
 
-    Coefficients[] getRandomCoefficients(int samples) {
-        Coefficients[] coefficients = new Coefficients[samples];
-        for (int i = 0; i < samples; ++i) {
-            coefficients[i] = Coefficients.randomCoefficients();
-        }
-        return coefficients;
-    }
-
-    Point getRotatedPoint(Point point, double theta) {
-        double xRot = point.x() * Math.cos(theta) - point.y() * Math.sin(theta);
-        double yRot = point.x() * Math.sin(theta) + point.y() * Math.cos(theta);
-        return new Point(xRot, yRot);
-    }
-
-    boolean containedInTheArea(Point point) {
-        if (point.x() >= X_MIN && point.x() <= X_MAX) {
-            return point.y() >= Y_MIN && point.y() <= Y_MAX;
-        }
-        return false;
     }
 
     void correction(FractalImage canvas) {
@@ -120,6 +101,27 @@ public class Render {
         }
     }
 
+    Coefficients[] getRandomCoefficients(int samples) {
+        Coefficients[] coefficients = new Coefficients[samples];
+        for (int i = 0; i < samples; ++i) {
+            coefficients[i] = Coefficients.randomCoefficients();
+        }
+        return coefficients;
+    }
+
+    Point getRotatedPoint(Point point, double theta) {
+        double xRot = point.x() * Math.cos(theta) - point.y() * Math.sin(theta);
+        double yRot = point.x() * Math.sin(theta) + point.y() * Math.cos(theta);
+        return new Point(xRot, yRot);
+    }
+
+    boolean containedInTheArea(Point point) {
+        if (point.x() >= X_MIN && point.x() <= X_MAX) {
+            return point.y() >= Y_MIN && point.y() <= Y_MAX;
+        }
+        return false;
+    }
+
     Point AffineTransformation(double x, double y, Coefficients coefficients) {
         double newX;
         double newY;
@@ -127,4 +129,5 @@ public class Render {
         newY = coefficients.d() * x + coefficients.e() * y + coefficients.f();
         return new Point(newX, newY);
     }
+
 }

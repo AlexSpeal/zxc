@@ -6,7 +6,7 @@ public class FractalImage {
     private Pixel[][] data;
 
     public void create(int width, int height) {
-        data=new Pixel[width][height];
+        data = new Pixel[width][height];
         for (int i = 0; i < width; ++i) {
             for (int j = 0; j < height; ++j) {
                 data[i][j] = new Pixel();
@@ -16,12 +16,9 @@ public class FractalImage {
 
     ;
 
-    boolean contains(int x, int y) {
-        return false;
-    }
-
-    Pixel pixel(int x, int y) {
-        return null;
+    boolean contains(double x, double y) {
+        return ((x < width)) && ((y < height)
+            && (x >= 0) && (y >= 0));
     }
 
     public void setData(Pixel[][] data) {
