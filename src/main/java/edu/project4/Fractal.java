@@ -1,5 +1,5 @@
 package edu.project4;
 
 public interface Fractal {
-    Point apply( Point point);
+    Point apply(Coefficients coefficients, Point point);
 }

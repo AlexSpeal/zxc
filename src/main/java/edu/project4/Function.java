@@ -2,5 +2,5 @@ package edu.project4;
 
 import java.util.List;
 
-public record Function(Coefficients coefficients, RGB rgb, List<Options> options) {
+public record Function(Coefficients coefficients, RGB rgb, List<Fractal> fractals) {
 }
