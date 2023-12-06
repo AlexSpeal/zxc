@@ -8,9 +8,9 @@ public class Run {
     public static void main(String[] args) {
         //var start = System.nanoTime();
         FractalImage canvas = new FractalImage();
-        canvas.create(1920, 1080);
+        canvas.create();
         Render render = new Render();
-        render.render(canvas, 10000, 2000, 1);
+        render.render(canvas, 2000, 5000, 1);
         render.correction(canvas);
         //var end = System.nanoTime() - start;
         //System.out.println(end);

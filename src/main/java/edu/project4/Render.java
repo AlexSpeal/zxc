@@ -20,20 +20,24 @@ public class Render {
     ) {
         Random r = new Random();
         for (int i = 0; i < samples; ++i) {
-
             double newX = Math.random() * (X_MAX - X_MIN) + X_MIN;
             double newY = Math.random() * (Y_MAX - Y_MIN) + Y_MIN;
+
             for (int step = -MINIMAL_ITERATION; step < iterPerSample; ++step) {
                 var function = Functions.getRandomFunction();
                 Point point = AffineTransformation(newX, newY, function);
-                for (var func : function.fractals()) {
-                    point = func.apply(function.coefficients(), point);
-                }
+                //for (var func : function.fractals()) {
+                //  point = func.apply(function.coefficients(), point);
+                //}
+                point = function.fractals().get(r.nextInt(function.fractals().size()))
+                    .apply(function.coefficients(), point);
+                newX = point.x();
+                newY = point.y();
                 if (step >= 0 && containedInTheArea(point)) {
                     double theta = 0;
-                    /*for (int s = 0; s < symmetry; ++s) {
+                    for (int s = 0; s < symmetry; ++s) {
                         theta += 2 * Math.PI / symmetry;
-                        point = getRotatedPoint(point, theta);*/
+                        point = getRotatedPoint(point, theta);
                         double xInCanvas = (point.x() - X_MIN) / (X_MAX - X_MIN) * RES_X;
                         double yInCanvas = (point.y() - Y_MIN) / (Y_MAX - Y_MIN) * RES_Y;
                         if (!canvas.contains(xInCanvas, yInCanvas)) {
@@ -42,15 +46,15 @@ public class Render {
                         int x = (int) xInCanvas;
                         int y = (int) yInCanvas;
                         canvas.getData()[x][y].incrementCountHit();
-                        canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
-                            + function.rgb().getBlue()) / 2);
                         canvas.getData()[x][y].getRgb().setRed((canvas.getData()[x][y].getRgb().getRed()
                             + function.rgb().getRed()) / 2);
                         canvas.getData()[x][y].getRgb().setGreen((canvas.getData()[x][y].getRgb().getGreen()
                             + function.rgb().getGreen()) / 2);
+                        canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
+                            + function.rgb().getBlue()) / 2);
 
                     }
-
+                }
             }
         }
 
@@ -85,14 +89,6 @@ public class Render {
                 canvas.getData()[row][col].getRgb().setBlue(newColor);
             }
         }
-    }
-
-    Coefficients[] getRandomCoefficients(int samples) {
-        Coefficients[] coefficients = new Coefficients[samples];
-        for (int i = 0; i < samples; ++i) {
-            coefficients[i] = Coefficients.randomCoefficients();
-        }
-        return coefficients;
     }
 
     Point getRotatedPoint(Point point, double theta) {

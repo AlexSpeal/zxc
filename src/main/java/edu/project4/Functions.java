@@ -1,11 +1,16 @@
 package edu.project4;
 
-import edu.project4.Samples.DIAMOND;
+import edu.project4.Samples.BUBBLE;
+import edu.project4.Samples.CYLINDER;
 import edu.project4.Samples.DISC;
 import edu.project4.Samples.EXPONENTIAL;
+import edu.project4.Samples.FISHEYE;
 import edu.project4.Samples.HEART;
-import edu.project4.Samples.HYPERBOLIC;
+import edu.project4.Samples.HORSESHO;
+import edu.project4.Samples.SPHERICAL;
 import edu.project4.Samples.SPIRAL;
+import edu.project4.Samples.SWIRL;
+import edu.project4.Samples.TANGENT;
 import java.util.List;
 import java.util.Random;
 
@@ -43,26 +48,27 @@ public class Functions {
         );*/
    private static final List<Function> FunctionList = List.of(
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of(new HEART(), new EXPONENTIAL())
+           List.of( new EXPONENTIAL(), new SWIRL())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
            List.of(new HEART(), new EXPONENTIAL(), new DISC())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of(new HEART(), new DIAMOND())
+           List.of(new TANGENT(), new HORSESHO(), new FISHEYE())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of(new HEART(), new SPIRAL())
+           List.of(new HEART(), new BUBBLE())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of(new SPIRAL(), new HYPERBOLIC())
+           List.of(new SPIRAL(), new SPHERICAL())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of( new DISC(), new HEART())
+           List.of(new FISHEYE())
        ),
        new Function(Coefficients.randomCoefficients(), new RGB(),
-           List.of(new DIAMOND(), new HEART())
-       ));
+           List.of(new SWIRL(),new TANGENT(), new CYLINDER())
+       )
+   );
 
     public static Function getRandomFunction() {
         Random r = new Random();
