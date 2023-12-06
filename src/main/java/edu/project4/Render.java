@@ -18,7 +18,7 @@ public class Render {
     private static final int RES_X = 1920;
     private static final int RES_Y = 1080;
     private static final int MINIMAL_ITERATION = 20;
-    private static final int THREADS = 5;
+    private static final int THREADS = 6;
     private final ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
     private final Lock lock = new ReentrantLock();
 

@@ -4,6 +4,7 @@ public class Run {
     private Run() {
     }
 
+    //5238249700
     @SuppressWarnings({"UncommentedMain", "MagicNumber"})
     public static void main(String[] args) {
         var start = System.nanoTime();
@@ -17,7 +18,13 @@ public class Run {
         Drawer drawerFlame = new Drawer(1920, 1080);
         drawerFlame.drawFlame(canvas.getData());
         //drawerFlame.saveToFile();
-        //8389836300
-        //5238249700
+
+        //10107135400
+        //9796012000
+        //8733594700
+        //7556467900
+        //8944794700
+        //5599083700
+
     }
 }
