@@ -1,6 +1,13 @@
 package edu.project4;
 
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Stream;
 import static java.lang.Math.log10;
 
 public class Render {
@@ -11,6 +18,9 @@ public class Render {
     private static final int RES_X = 1920;
     private static final int RES_Y = 1080;
     private static final int MINIMAL_ITERATION = 20;
+    private static final int THREADS = 5;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
+    private final Lock lock = new ReentrantLock();
 
     public void render(
         FractalImage canvas,
@@ -18,18 +28,29 @@ public class Render {
         long iterPerSample,
         int symmetry
     ) {
+        var tasks = Stream.generate(() -> CompletableFuture.runAsync(
+            () -> renderThreads(canvas, samples, iterPerSample, symmetry),
+            executorService
+        )).limit(THREADS).toArray(CompletableFuture[]::new);
+        CompletableFuture.allOf(tasks).join();
+    }
+
+    private void renderThreads(
+        FractalImage canvas,
+        int samples,
+        long iterPerSample,
+        int symmetry
+    ) {
         Random r = new Random();
-        for (int i = 0; i < samples; ++i) {
-            double newX = Math.random() * (X_MAX - X_MIN) + X_MIN;
-            double newY = Math.random() * (Y_MAX - Y_MIN) + Y_MIN;
+        for (int i = 0; i < (samples / THREADS); ++i) {
+            double newX = ThreadLocalRandom.current().nextDouble(X_MIN, X_MAX);
+            double newY = ThreadLocalRandom.current().nextDouble(Y_MIN, Y_MAX);
 
             for (int step = -MINIMAL_ITERATION; step < iterPerSample; ++step) {
                 var function = Functions.getRandomFunction();
                 Point point = AffineTransformation(newX, newY, function);
-                //for (var func : function.fractals()) {
-                //  point = func.apply(function.coefficients(), point);
-                //}
-                point = function.fractals().get(r.nextInt(function.fractals().size()))
+                int someFractal = ThreadLocalRandom.current().nextInt(function.fractals().size());
+                point = function.fractals().get(someFractal)
                     .apply(function.coefficients(), point);
                 newX = point.x();
                 newY = point.y();
@@ -45,19 +66,24 @@ public class Render {
                         }
                         int x = (int) xInCanvas;
                         int y = (int) yInCanvas;
-                        canvas.getData()[x][y].incrementCountHit();
-                        canvas.getData()[x][y].getRgb().setRed((canvas.getData()[x][y].getRgb().getRed()
-                            + function.rgb().getRed()) / 2);
-                        canvas.getData()[x][y].getRgb().setGreen((canvas.getData()[x][y].getRgb().getGreen()
-                            + function.rgb().getGreen()) / 2);
-                        canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
-                            + function.rgb().getBlue()) / 2);
+                        try {
+                            lock.lock();
+                            canvas.getData()[x][y].getRgb().setRed((canvas.getData()[x][y].getRgb().getRed()
+                                + function.rgb().getRed()) / 2);
+                            canvas.getData()[x][y].getRgb().setGreen((canvas.getData()[x][y].getRgb().getGreen()
+                                + function.rgb().getGreen()) / 2);
+                            canvas.getData()[x][y].getRgb().setBlue((canvas.getData()[x][y].getRgb().getBlue()
+                                + function.rgb().getBlue()) / 2);
+                            canvas.getData()[x][y].incrementCountHit();
+                        } finally {
+                            lock.unlock();
+                        }
 
                     }
+
                 }
             }
         }
-
     }
 
     void correction(FractalImage canvas) {
