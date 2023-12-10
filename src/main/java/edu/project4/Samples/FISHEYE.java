@@ -4,6 +4,7 @@ import edu.project4.Coefficients;
 import edu.project4.Fractal;
 import edu.project4.Point;
 
+@SuppressWarnings("MagicNumber")
 public class FISHEYE implements Fractal {
     @Override
     public Point apply(Coefficients coefficients, Point point) {

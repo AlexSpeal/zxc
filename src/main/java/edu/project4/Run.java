@@ -4,27 +4,24 @@ public class Run {
     private Run() {
     }
 
-    //5238249700
     @SuppressWarnings({"UncommentedMain", "MagicNumber"})
     public static void main(String[] args) {
-        var start = System.nanoTime();
         FractalImage canvas = new FractalImage();
         canvas.create();
         Render render = new Render();
-        render.render(canvas, 3000, 10000, 1);
+        render.render(canvas, 3000, 1000, 5);
         render.correction(canvas);
-        var end = System.nanoTime() - start;
-        System.out.println(end);
         Drawer drawerFlame = new Drawer(1920, 1080);
         drawerFlame.drawFlame(canvas.getData());
-        //drawerFlame.saveToFile();
+        drawerFlame.saveToFile();
 
-        //10107135400
-        //9796012000
-        //8733594700
-        //7556467900
-        //8944794700
-        //5599083700
+        //6 потоков 10107135400
+        //5 потоков 9796012000
+        //4 потоков 8733594700
+        //3 потоков 7556467900
+        //2 потоков 8944794700
+        //1 потоков 5599083700
+        // не могу понять почему в однопотоке работает быстрее всего...
 
     }
 }
