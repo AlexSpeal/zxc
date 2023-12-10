@@ -2,7 +2,7 @@ package edu.project2;
 
 public class Cell {
 
-    public enum Type { WALL, PASSAGE }
+    public enum Type {WALL, PASSAGE}
 
     private final int row;
     private final int col;
@@ -30,9 +30,5 @@ public class Cell {
 
     public void setVisited(boolean visited) {
         isVisited = visited;
-    }
-
-    public Type getType() {
-        return type;
     }
 }

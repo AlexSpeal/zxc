@@ -73,7 +73,7 @@ public class SolverThreadsMaze extends RecursiveTask<List<Cell>> implements Solv
         return result;
     }
 
-    private void actionsForDifferentCountOfDirections(List<Integer> directions, Cell currentCell, Stack<Cell> path) {
+    /*private void actionsForDifferentCountOfDirections(List<Integer> directions, Cell currentCell, Stack<Cell> path) {
         if (directions.size() <= 1) {
             cellStack.add(currentCell);
             currentCell.setVisited(true);
@@ -93,6 +93,6 @@ public class SolverThreadsMaze extends RecursiveTask<List<Cell>> implements Solv
             solverThreadsMaze.fork();
             path.addAll(solverThreadsMaze.join());
         }
-    }
+    }*/
 
 }
