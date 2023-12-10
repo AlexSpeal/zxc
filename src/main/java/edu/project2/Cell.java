@@ -31,4 +31,8 @@ public class Cell {
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
+
+    public Type getType() {
+        return type;
+    }
 }
