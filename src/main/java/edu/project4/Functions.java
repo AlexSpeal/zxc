@@ -1,10 +1,10 @@
 package edu.project4;
 
-import edu.project4.Samples.BUBBLE;
-import edu.project4.Samples.DISC;
-import edu.project4.Samples.HORSESHO;
-import edu.project4.Samples.TANGENT;
-import edu.project4.Samples.WAVES;
+import edu.project4.samples.BUBBLE;
+import edu.project4.samples.DISC;
+import edu.project4.samples.HORSESHO;
+import edu.project4.samples.TANGENT;
+import edu.project4.samples.WAVES;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 

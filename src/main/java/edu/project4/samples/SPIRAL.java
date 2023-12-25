@@ -1,7 +1,6 @@
-package edu.project4.Samples;
+package edu.project4.samples;
 
 import edu.project4.Coefficients;
-import edu.project4.Fractal;
 import edu.project4.Point;
 
 public class SPIRAL implements Fractal {

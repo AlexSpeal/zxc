@@ -4,14 +4,20 @@ public class Run {
     private Run() {
     }
 
-    @SuppressWarnings({"UncommentedMain", "MagicNumber"})
+    private static final int SAMPLES = 3000;
+    private static final int ITER_PER_SAMPLE = 1000;
+    private static final int SYMMETRY = 5;
+    private static final int WIDTH = 1920;
+    private static final int HEIGHT = 1080;
+
+    @SuppressWarnings({"UncommentedMain"})
     public static void main(String[] args) {
         FractalImage canvas = new FractalImage();
         canvas.create();
         Render render = new Render();
-        render.render(canvas, 3000, 1000, 5);
+        render.render(canvas, SAMPLES, ITER_PER_SAMPLE, SYMMETRY);
         render.correction(canvas);
-        Drawer drawerFlame = new Drawer(1920, 1080);
+        Drawer drawerFlame = new Drawer(WIDTH, HEIGHT);
         drawerFlame.drawFlame(canvas.getData());
         drawerFlame.saveToFile();
 
