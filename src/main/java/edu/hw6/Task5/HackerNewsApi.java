@@ -15,6 +15,9 @@ import static java.net.http.HttpClient.newHttpClient;
 
 public class HackerNewsApi {
     private final static int MAX_DURATION = 30;
+    private static final String URI_WEBSITE_FIRST = "https://hacker-news.firebaseio.com/v0/topstories.json";
+    private static final String URI_WEBSITE_SECOND = "https://hacker-news.firebaseio.com/v0/item/";
+    private static final String EXTENSION = ".json";
 
     private HackerNewsApi() {
     }
@@ -22,11 +25,10 @@ public class HackerNewsApi {
     public static long[] hackerNewsTopStories() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://hacker-news.firebaseio.com/v0/topstories.json"))
+                .uri(new URI(URI_WEBSITE_FIRST))
                 .GET()
                 .timeout(Duration.of(MAX_DURATION, ChronoUnit.SECONDS))
                 .build();
-
             var response = newHttpClient()
                 .send(request, HttpResponse.BodyHandlers.ofString()).body();
 
@@ -47,7 +49,7 @@ public class HackerNewsApi {
         try {
             String encodedId = URLEncoder.encode(String.valueOf(id), StandardCharsets.UTF_8);
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://hacker-news.firebaseio.com/v0/item/" + encodedId + ".json"))
+                .uri(new URI(URI_WEBSITE_SECOND + encodedId + EXTENSION))
                 .GET()
                 .timeout(Duration.of(MAX_DURATION, ChronoUnit.SECONDS))
                 .build();
